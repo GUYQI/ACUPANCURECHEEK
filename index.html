@@ -76,6 +76,12 @@
         border-bottom: 1px solid #1e293b;
       }
       #studyTable td:last-child { border-bottom: none; }
+      #enTable, #enTable thead, #enTable tbody, #enTable th, #enTable td, #enTable tr { display: block; }
+      #enTable thead tr { display: none; }
+      #enTable tr { margin-bottom: 0.9rem; background-color: #0f172a; border-radius: 0.75rem; border: 1px solid #1e293b; overflow: hidden; }
+      #enTable td { display: flex; flex-direction: column; padding: 0.6rem 0.9rem; border-bottom: 1px solid #1e293b; }
+      #enTable td:last-child { border-bottom: none; }
+      #enTable td::before { content: attr(data-label); font-weight: 700; color: #94a3b8; margin-bottom: 0.2rem; font-size: 0.75rem; }
       #studyTable td::before {
         content: attr(data-label);
         font-weight: 700;
@@ -101,6 +107,7 @@
           <a href="#intro" class="text-sky-300 hover:text-white">1. עקרונות השיטה</a>
           <a href="#atlas" class="text-sky-300 hover:text-white">2. אטלס אינטראקטיבי</a>
           <a href="#pointsTable" class="text-sky-300 hover:text-white">3. טבלת 16 הנקודות</a>
+          <a href="#originalTable" class="text-sky-300 hover:text-white">3א. Table 1 (מקור באנגלית)</a>
           <a href="#protocols" class="text-sky-300 hover:text-white">4. פרוטוקולים</a>
           <a href="#technique" class="text-sky-300 hover:text-white">5. טכניקה ובטיחות</a>
           <a href="#videos" class="text-sky-300 hover:text-white">6. סרטונים</a>
@@ -612,6 +619,32 @@
       </div>
       <div class="mt-3 text-xs text-slate-400 bg-slate-950/70 p-3 rounded-lg border border-slate-800 inline-block">
         <strong class="text-slate-200">הערה:</strong> P1 – מטופל מס' 1; P2 – מטופל מס' 2 בדיווח. "–" = לא שימשה בדיווח.
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 3a. ORIGINAL ENGLISH TABLE 1 ==================== -->
+  <section id="originalTable" class="max-w-7xl w-full mx-auto px-4 pb-6">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">3א</span>
+        <h2 class="text-lg md:text-xl font-extrabold text-white">טבלה 1 במקור (אנגלית)</h2>
+      </div>
+      <p class="text-xs md:text-sm text-slate-400 mb-4">הנוסח המקורי של הטבלה מהמאמר, לעיון ולהשוואה עם התרגום. "inch" במקור = צון (寸). לחיצה על שורה מציגה את הנקודה באטלס.</p>
+      <div dir="ltr" lang="en" class="text-left">
+        <div class="text-sm text-slate-200 mb-2"><strong>Table 1</strong> Anatomical orientation of the acupoints and their main applications</div>
+        <div class="md:rounded-xl md:overflow-hidden md:border md:border-slate-800">
+          <table id="enTable" class="w-full text-left border-collapse text-sm">
+            <thead class="bg-slate-950 text-slate-300">
+              <tr>
+                <th class="p-3 font-semibold border-b border-slate-800">Name</th>
+                <th class="p-3 font-semibold border-b border-slate-800">Orientation</th>
+                <th class="p-3 font-semibold border-b border-slate-800">Applications</th>
+              </tr>
+            </thead>
+            <tbody id="enTableBody" class="text-slate-300"></tbody>
+          </table>
+        </div>
       </div>
     </div>
   </section>
@@ -1172,7 +1205,7 @@
     const studyTable = {
       "CA-1":  { loc: "1 צון מעל אמצע הגבול העליון של קשת הזיגומה.", ind: "כאב ראש, סחרחורת, כאב שיניים, נדודי שינה, מתח, חרדה, דיכאון, שבץ וכו'.", use: ["P1"] },
       "CA-2":  { loc: "נקודת המפגש בין השפה האחורית של הזיז הקורונואידי של הלסת התחתונה לבין הגבול התחתון של קשת הזיגומה.", ind: "כאב ראש, כאב צוואר, כאב בחזה, מועקה בחזה, נפיחות וכאב בשדיים, טכיקרדיה, הפרעות קצב, אסטמה וכו'.", use: ["P1"] },
-      "CA-3":  { loc: "אמצע הקו המחבר בין נקודות המחמם העליון והמחמם התחתון.", ind: "התכווצויות בקיבה, דלקת קיבה חריפה/כרונית, צרבת וחומציות.", use: ["P1"] },
+      "CA-3":  { loc: "אמצע הקו המחבר בין נקודות המחמם העליון והמחמם התחתון.", ind: "התכווצויות בקיבה, דלקת קיבה חריפה/כרונית, צרבת וחומציות, שיהוקים, הקאות, מחלות עיכול וכו'.", use: ["P1"] },
       "CA-4":  { loc: "על הקו האלכסוני הקדמי של הלסת התחתונה.", ind: "נפיחות וכאב בבטן, קוליטיס, כאבי מחזור, מחלה דלקתית של האגן (PID), אי-סדירות בווסת, הפרשות נרתיקיות, מחלות גינקולוגיות.", use: ["P1"] },
       "CA-5":  { loc: "הקצה העליון של שורש קשת הזיגומה.", ind: "כאב צוואר, צוואר תפוס לאחר שינה, ספונדילוזיס צווארי, כאב גרון, סחרחורת, מתח, התכווצות שרירי הסקלנוס, טנטון וכו'.", use: ["P1"] },
       "CA-6":  { loc: "נקודת המפגש בין הגבול התחתון של קשת הזיגומה לבין הקופסית התחתונה של מפרק הלסת (TMJ).", ind: "כאב גב, מתיחת שריר המעוין, מועקה בחזה, קוצר נשימה, כאב בטן, דפיקות לב וכו'.", use: ["P1", "P2"] },
@@ -1182,10 +1215,10 @@
       "CA-10": { loc: "אמצע הקו המחבר בין זווית העין החיצונית לתחתית עצם הלחי.", ind: "כאב מרפק, מרפק טניס, מרפק גולף, דלקת בגידי פושטי ומכופפי שורש כף היד וכו'.", use: [] },
       "CA-11": { loc: "בקפל האף-שפה (Nasolabial fold), בקו האופקי של הקצה התחתון של הנחיר.", ind: "כאב בשורש כף היד, פציעות במפרק, תסמונת התעלה הקרפלית, כאב באצבעות.", use: [] },
       "CA-12": { loc: "אמצע הקו המחבר בין הקצה התחתון של הנחיר לגבול האדום של השפה העליונה.", ind: "דלקת פרקים באצבעות, דלקת בגידים, חוסר תחושה באצבעות או בכף היד.", use: [] },
-      "CA-13": { loc: "1 צון קדמית-עליונה לזווית הלסת התחתונה, על בליטת שריר המלעס.", ind: "אישיאס, דלקת מפרקים ניוונית בירך, פציעה בשריר הפיריפורמיס, כאב במפשעה.", use: ["P1", "P2"] },
-      "CA-14": { loc: "אמצע הקו המחבר בין זווית הלסת התחתונה לנקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "כאב ברך, כאב לאורך העצב הפרונאלי, דלקת מפרקים, פציעה בשרירי ההמסטרינג, התכווצות שריר התאומים (Gastrocnemius) וכו'.", use: ["P1"] },
+      "CA-13": { loc: "1 צון קדמית-עליונה לזווית הלסת התחתונה, על בליטת שריר המלעס.", ind: "אישיאס, דלקת מפרקים ניוונית בירך בעקבות פציעה, פציעה בשריר הפיריפורמיס, כאב במפשעה.", use: ["P1", "P2"] },
+      "CA-14": { loc: "אמצע הקו המחבר בין זווית הלסת התחתונה לנקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "כאב ברך, כאב לאורך העצב הפיבולרי השטחי, דלקת מפרקים, פציעה בשרירי ההמסטרינג, התכווצות שריר התאומים (Gastrocnemius) וכו'.", use: ["P1"] },
       "CA-15": { loc: "בשליש הקרוב (לנקודת הברך) של הקו המחבר בין נקודת הברך (CA-14) לנקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "נקע בקרסול, נפיחות וכאב, דלקת מפרקים בקרסול, דלקת בגיד אכילס, כאב בעקב.", use: [] },
-      "CA-16": { loc: "0.5 צון לצד נקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "גאוט (שיגדון), מתיחת הפאשיה הפלנטרית, דורבן, כאב בעקב, כאב בבוהן.", use: ["P1"] }
+      "CA-16": { loc: "0.5 צון לצד נקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "גאוט (שיגדון), נקע בפאשיה של עצמות המסרק, דלקת הפאשיה הפלנטרית (דורבן), כאב בעקב, כאב בבוהן.", use: ["P1"] }
     };
 
     function studyUseHtml(use) {
@@ -1212,6 +1245,46 @@
           <td class="p-3 align-top text-xs md:text-sm" data-label="מיקום">${s.loc}</td>
           <td class="p-3 align-top text-xs md:text-sm" data-label="התוויות">${s.ind}</td>
           <td class="p-3 align-top" data-label="בשימוש בדיווח (מטופלים)">${studyUseHtml(s.use)}</td>`;
+        body.appendChild(tr);
+      });
+    }
+
+    // ==================== DATASET 4: ORIGINAL ENGLISH TABLE 1 (verbatim from the paper) ====================
+    const studyTableEn = {
+      "CA-1":  ["Head point", "1 inch above the upper edge of middle point of zygomatic arch", "Headache, dizziness, toothache, insomnia, stress, anxiety, depression, stroke, etc."],
+      "CA-2":  ["Upper energizer point", "The cross of posterior coronoid of mandible and lower edge of zygomatic arch", "Headache, cervical pain, chest pain, chest tightness, breast swelling and pain, tachycardia, arrhythmia, asthma, etc."],
+      "CA-3":  ["Middle energizer point", "The middle point of connecting line between upper and lower energizer acupoints", "Stomach cramp, acute/chronic gastritis, heartburn with acidity, hiccups, vomiting, digestive diseases, etc."],
+      "CA-4":  ["Lower energizer point", "Anterior oblique line of mandible", "Abdominal bloating and pain, colitis, dysmenorrhea, pelvic inflammatory disease, menstrual irregularities, leukorrhea, gynecological disease."],
+      "CA-5":  ["Cervical point", "Top edge of the root of zygomatic arch", "Neck pain, stiff neck after sleeping, cervical spondylosis, sore throat, dizziness, stress, scalene spasm, tinnitus, etc."],
+      "CA-6":  ["Dorsal point", "The cross of lower edge of zygomatic arch and inferior capsule of temporomandibular joint", "Back pain, rhomboid muscle strain, chest tightness, shortness of breath, stomachache, heart palpitations, etc."],
+      "CA-7":  ["Lumbar point", "The middle of connecting line between dorsal and sacral points", "Lower back pain, lumbar muscle strain, acute lumbar sprains, sciatica pain, herniated disc, etc."],
+      "CA-8":  ["Sacral point", "0.5 inch to anterior & superior angle of mandible", "Sacrospinous muscle strain, lower back pain in women, injuries of sacroiliac ligament, bedwetting, prostatitis, etc."],
+      "CA-9":  ["Shoulder point", "The middle point of temporozygomatic suture", "Shoulder pain, frozen shoulder, tendonitis of biceps brachii, synovitis of infra-acromion of scapula, tendonitis of supraspinatus muscle, etc."],
+      "CA-10": ["Elbow point", "The middle point of connecting line between lateral canthus and bottom of zygomatic bone", "Elbow pain, tennis elbow, golf elbow, wrist extensor tendonitis, wrist flexor tendonitis, etc."],
+      "CA-11": ["Wrist point", "The point of nasolabial folds at the horizon level of lower edge of nostrils", "Wrist pain, injuries of wrist joint, carpal tunnel syndrome, finger pain"],
+      "CA-12": ["Hand point", "The middle of connecting line between the middle point of lower edge of nostril and vermilions border", "Finger arthritis, tenosynovitis, finger numbness, hand numbness"],
+      "CA-13": ["Hip point", "1 inch of anterior & superior of angle of mandible on the masseteric tuberosity", "Sciatica pain, wound-induced hip osteoarthritis, injury of piriform muscle, groin pain"],
+      "CA-14": ["Knee point", "The middle point of connecting line between angle of mandible and chengjiang point", "Knee pain, superficial fibular nerve pain, arthritis of knee joint, hamstring muscle injury, gastrocnemius muscle spasm, etc."],
+      "CA-15": ["Ankle point", "1/3 proximity of connecting line between knee and Chengjiang points", "Ankle joint sprain, ankle joint swelling and pain, ankle arthritis, Achilles tendinitis, heel pain"],
+      "CA-16": ["Foot point", "0.5 inch lateral to Chengjiang point", "Gout, metatarsals fascia sprain, plantar fasciitis, heel pain, toe pain"]
+    };
+
+    function renderEnTable() {
+      const body = document.getElementById("enTableBody");
+      body.innerHTML = "";
+      cheekPoints.forEach((pt) => {
+        const [name, orient, apps] = studyTableEn[pt.code];
+        const tr = document.createElement("tr");
+        const isSel = pt.code === selectedPointCode;
+        tr.className = `study-row border-b border-slate-800 transition-colors ${isSel ? "bg-slate-800/80" : "hover:bg-slate-800/50"}`;
+        tr.onclick = () => {
+          selectPoint(pt.code);
+          document.getElementById("atlas").scrollIntoView({ behavior: "smooth" });
+        };
+        tr.innerHTML = `
+          <td class="p-3 align-top whitespace-nowrap" data-label="Name"><span class="inline-block w-2.5 h-2.5 rounded-full mr-1.5" style="background:${pt.color}"></span><span class="font-bold text-white">${name}</span> <span class="text-slate-400">(${pt.code})</span></td>
+          <td class="p-3 align-top text-xs md:text-sm" data-label="Orientation">${orient}</td>
+          <td class="p-3 align-top text-xs md:text-sm" data-label="Applications">${apps}</td>`;
         body.appendChild(tr);
       });
     }
@@ -1436,6 +1509,7 @@
       });
 
       renderStudyTable();
+      renderEnTable();
     }
 
     function selectMuscle(muscleId) {
