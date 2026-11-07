@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>טבלת דיקור לחיים</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Assistant', sans-serif;
+            background-color: #f8fafc;
+        }
+        
+        /* Mobile responsive table -> cards */
+        @media (max-width: 767px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            
+            thead tr {
+                display: none;
+            }
+            
+            tr {
+                margin-bottom: 1rem;
+                background-color: #ffffff;
+                border-radius: 0.75rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+                border: 1px solid #e2e8f0;
+                overflow: hidden;
+            }
+            
+            td {
+                display: flex;
+                flex-direction: column;
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid #f1f5f9;
+                font-size: 0.95rem;
+            }
+            
+            td:last-child {
+                border-bottom: none;
+            }
+            
+            td::before {
+                content: attr(data-label);
+                font-weight: 700;
+                color: #475569;
+                margin-bottom: 0.25rem;
+                font-size: 0.85rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8 text-slate-800">
+
+    <div class="max-w-6xl mx-auto">
+        <div class="mb-6">
+            <h1 class="text-2xl md:text-3xl font-bold text-slate-900 mb-2">נקודות דיקור סטנדרטיות בדיקור לחיים</h1>
+            <p class="text-slate-600 md:text-lg">שימושיהן העיקריים והנקודות ששימשו לשיכוך כאב במחקר הנוכחי (טבלה 1).</p>
+        </div>
+
+        <div class="bg-white md:shadow-md md:rounded-xl md:overflow-hidden md:border md:border-slate-200">
+            <table class="w-full text-right border-collapse">
+                <thead class="bg-slate-100 text-slate-700">
+                    <tr>
+                        <th class="p-4 font-semibold border-b border-slate-200">שם הנקודה</th>
+                        <th class="p-4 font-semibold border-b border-slate-200">מיקום</th>
+                        <th class="p-4 font-semibold border-b border-slate-200">שימושים רפואיים (התוויות)</th>
+                        <th class="p-4 font-semibold border-b border-slate-200">בשימוש עבור (מטופלים בדיווח)</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודות ראש (Head point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">1 אינץ' מעל הקצה העליון של נקודת האמצע בקשת הלחי (הקשת הזיגומטית)</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב ראש, סחרחורת, כאב שיניים, נדודי שינה, מתח, חרדה, דיכאון, שבץ וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">מחמם עליון (Upper energizer point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת החיתוך בין החלק האחורי של הזיז הקורונואידי בלסת התחתונה והקצה התחתון של קשת הלחי</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב ראש, כאב צווארי, כאב בחזה, מועקה בחזה, נפיחות וכאב בשדיים, טכיקרדיה, הפרעות קצב, אסטמה וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">מחמם אמצעי (Middle energizer point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת האמצע בקו המחבר בין נקודות הדיקור של המחמם העליון והמחמם התחתון</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">התכווצות בקיבה, דלקת קיבה חריפה/כרונית, צרבת עם חומציות.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">מחמם תחתון (Lower energizer point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">הקו האלכסוני הקדמי של הלסת התחתונה</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">נפיחות וכאב בבטן, קוליטיס, כאבי מחזור, מחלה דלקתית של האגן (PID), אי-סדירות בווסת, הפרשות נרתיקיות, מחלות גינקולוגיות.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודה צווארית (Cervical point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">הקצה העליון של שורש קשת הלחי</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב צוואר, צוואר תפוס לאחר שינה, ספונדילוזיס צווארי, כאב גרון, סחרחורת, מתח, התכווצות שריר המעלות (סקלנוס), טנטון וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודה גבית (Dorsal point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת החיתוך של הקצה התחתון של קשת הלחי והקפסולה התחתונה של מפרק הלסת (TMJ)</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב גב, מתיחת שריר המעוין, מועקה בחזה, קוצר נשימה, כאב בטן, דפיקות לב וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1, P2</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודה מותנית (Lumbar point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת האמצע בקו המחבר בין הנקודה הגבית לנקודה הסקראלית</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב גב תחתון, מתיחת שריר מותני, נקעים חריפים במותן, אישיאס, פריצת דיסק וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1, P2</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודה סקראלית (Sacral point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">0.5 אינץ' לזווית הקדמית והעליונה של הלסת התחתונה</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">מתיחה בשריר הסקרוספינלי, כאב גב תחתון בנשים, פציעות ברצועת הכסל והעצה, הרטבת לילה, דלקת בערמונית וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1, P2</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת כתף (Shoulder point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת האמצע של התפר הטמפורו-זיגומטי</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב כתף, כתף קפואה, דלקת בגיד הדו-ראשי, סינוביטיס של האינפרה-אקרומיון בשכמה, דלקת בגיד הסופרספינטוס וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת מרפק (Elbow point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת האמצע בקו המחבר בין זווית העין החיצונית לתחתית עצם הלחי</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב מרפק, מרפק טניס, מרפק גולף, דלקת בגידי פושטי ומכופפי שורש כף היד וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה"><span class="text-slate-400">-</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת שורש כף היד (Wrist point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">הנקודה בקפלי האף-שפה בקו האופקי של הקצה התחתון של הנחיריים</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב בשורש כף היד, פציעות במפרק, תסמונת התעלה הקרפלית, כאב באצבעות.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה"><span class="text-slate-400">-</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת כף יד (Hand point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">אמצע הקו המחבר בין הקצה התחתון של הנחיר לגבול האדום של השפתיים</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">דלקת פרקים באצבעות, דלקת בגיד, חוסר תחושה באצבעות או בכף היד.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה"><span class="text-slate-400">-</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת ירך/אגן (Hip point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">1 אינץ' קדמית ועליונה לזווית הלסת התחתונה על הגבשושית של שריר המלעס</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">אישיאס, דלקת מפרקים ניוונית בירך מפציעה, פציעה בשריר הפיריפורמיס, כאב במפשעה.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1, P2</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת ברך (Knee point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">נקודת האמצע בקו המחבר בין זווית הלסת התחתונה לנקודת צ'אנג-ג'יאנג</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">כאב ברך, כאב בעצב הפיבולרי, דלקת מפרקים, פציעה בשרירי ההמסטרינג, התכווצות בשריר התאומים וכו'.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת קרסול (Ankle point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">בשליש המקורב של הקו המחבר בין נקודת הברך לנקודת צ'אנג-ג'יאנג</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">נקע בקרסול, נפיחות וכאב, דלקת מפרקים בקרסול, דלקת בגיד אכילס, כאב בעקב.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה"><span class="text-slate-400">-</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-50 transition-colors">
+                        <td class="p-4 md:border-b" data-label="שם הנקודה"><span class="font-bold md:font-semibold text-blue-700 md:text-slate-900">נקודת כף רגל (Foot point)</span></td>
+                        <td class="p-4 md:border-b" data-label="מיקום">0.5 אינץ' צידית לנקודת צ'אנג-ג'יאנג</td>
+                        <td class="p-4 md:border-b" data-label="שימושים רפואיים">שיגדון (גאוט), מתיחה של חיתולית עצמות המסרק, דורבן, כאב בעקב, כאב בבוהן.</td>
+                        <td class="p-4 md:border-b" data-label="בשימוש עבור מטופלים בדיווח זה">P1</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-4 text-sm text-slate-500 bg-white p-3 rounded-lg border border-slate-200 inline-block">
+            <strong>הערה:</strong> P1 מתייחס למטופל מס' 1; P2 מתייחס למטופל מס' 2 בדיווח.
+        </div>
+    </div>
+
+</body>
+</html>
