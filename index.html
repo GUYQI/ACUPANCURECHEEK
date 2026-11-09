@@ -56,6 +56,51 @@
       border-radius: 3px;
     }
     html { scroll-behavior: smooth; }
+    /* ===== Knowledge layer (book-derived content) ===== */
+    .kb-section { background:#0f172a; border:1px solid #1e293b; border-radius:1rem; padding:1.25rem; box-shadow:0 20px 25px -5px rgba(0,0,0,.25); }
+    .kb-card { background:rgba(2,6,23,.7); border:1px solid #1e293b; border-radius:.75rem; padding:1rem; color:#cbd5e1; font-size:.875rem; line-height:1.6; }
+    .kb-mini { background:rgba(2,6,23,.55); border:1px solid #1e293b; border-radius:.6rem; padding:.6rem .75rem; }
+    .kb-h3 { font-weight:700; color:#fcd34d; margin-bottom:.5rem; font-size:.95rem; display:flex; flex-wrap:wrap; align-items:center; gap:.4rem; }
+    .kb-panel { background:rgba(2,6,23,.8); border:1px solid rgba(245,158,11,.35); border-radius:.75rem; padding:.75rem; font-size:.75rem; color:#cbd5e1; line-height:1.6; }
+    .kb-panel:empty { display:none; }
+    .kb-details { border-top:1px solid #1e293b; margin-top:.5rem; }
+    .kb-details > summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:.5rem; padding:.45rem 0; font-weight:700; font-size:.75rem; }
+    .kb-details > summary::-webkit-details-marker { display:none; }
+    .kb-details > summary:hover span:first-child { color:#fff; }
+    .kb-caret { color:#64748b; transition:transform .2s; }
+    .kb-details[open] .kb-caret { transform:rotate(180deg); }
+    .kb-body { padding-bottom:.4rem; font-size:.75rem; color:#cbd5e1; line-height:1.65; }
+    .kb-tag { display:inline-block; background:#1e293b; color:#e2e8f0; border-radius:9999px; padding:.05rem .55rem; font-size:.7rem; }
+    .kb-badge { display:inline-block; border-radius:9999px; padding:.05rem .5rem; font-size:.66rem; font-weight:700; border:1px solid; white-space:nowrap; }
+    .kb-badge-rose { background:rgba(244,63,94,.15); color:#fda4af; border-color:rgba(244,63,94,.4); }
+    .kb-badge-sky { background:rgba(14,165,233,.15); color:#7dd3fc; border-color:rgba(14,165,233,.4); }
+    .kb-badge-amber { background:rgba(245,158,11,.15); color:#fcd34d; border-color:rgba(245,158,11,.4); }
+    .kb-badge-violet { background:rgba(139,92,246,.15); color:#c4b5fd; border-color:rgba(139,92,246,.4); }
+    .kb-warn { display:block; background:rgba(245,158,11,.1); border:1px solid rgba(245,158,11,.45); color:#fde68a; border-radius:.5rem; padding:.35rem .6rem; font-size:.7rem; font-weight:600; margin-top:.5rem; }
+    button.kb-warn:hover { background:rgba(245,158,11,.2); }
+    .src-ref { display:inline-block; color:#94a3b8; font-size:.66rem; font-weight:600; background:rgba(30,41,59,.7); border:1px solid #334155; border-radius:.35rem; padding:0 .35rem; white-space:nowrap; }
+    .pt-chip { display:inline-flex; align-items:center; border-radius:.4rem; padding:.05rem .45rem; font-size:.68rem; font-weight:800; transition:transform .15s, box-shadow .15s; }
+    .pt-chip:hover { transform:translateY(-1px); box-shadow:0 0 0 2px rgba(255,255,255,.55); }
+    .muscle-chip { display:inline-flex; align-items:center; gap:.3rem; border:1px solid; border-radius:9999px; padding:.05rem .5rem; font-size:.68rem; font-weight:700; background:rgba(2,6,23,.6); }
+    .muscle-chip:hover { background:rgba(30,41,59,.9); }
+    .gloss-link { color:inherit; border-bottom:1px dotted #fbbf24; cursor:help; }
+    .gloss-link:hover { color:#fde68a; }
+    .kb-table { width:100%; border-collapse:collapse; font-size:.75rem; text-align:right; }
+    .kb-table th { background:#020617; color:#cbd5e1; font-weight:600; padding:.5rem; border-bottom:1px solid #1e293b; }
+    .kb-table td { padding:.5rem; border-bottom:1px solid #1e293b; vertical-align:top; }
+    .kb-flash { animation:kbFlash 1.6s ease; }
+    @keyframes kbFlash { 0%,40% { box-shadow:0 0 0 3px rgba(251,191,36,.8); } 100% { box-shadow:0 0 0 0 rgba(251,191,36,0); } }
+    .book-line { margin-top:.35rem; padding-top:.35rem; border-top:1px dashed #334155; color:#fcd34d; font-size:.72rem; }
+    .kb-input { background:#020617; border:1px solid #334155; color:#e2e8f0; border-radius:.5rem; padding:.4rem .6rem; font-size:.75rem; }
+    .kb-input:focus { outline:none; border-color:#f59e0b; }
+    .case-card { scroll-margin-top:1rem; }
+    [id^="g-"] { scroll-margin-top:1rem; }
+    @media (max-width: 767px) {
+      .kb-table.kb-stack thead { display:none; }
+      .kb-table.kb-stack tr { display:block; border-bottom:1px solid #334155; padding:.25rem 0; }
+      .kb-table.kb-stack td { display:block; border:none; padding:.2rem .25rem; }
+      .kb-table.kb-stack td::before { content:attr(data-label); display:block; font-weight:700; color:#94a3b8; font-size:.66rem; }
+    }
     section[id], main[id] { scroll-margin-top: 1rem; }
     .study-row { cursor: pointer; }
     /* Mobile: study table -> cards */
@@ -99,11 +144,17 @@
         <p class="text-slate-400 text-xs md:text-sm mt-0.5">עקרונות השיטה, אטלס אנטומי אינטראקטיבי של 16 הנקודות ו-7 שרירי הלחי, טבלת מיקומים והתוויות, פרוטוקולים קליניים וטכניקת דיקור</p>
         <nav class="flex flex-wrap gap-x-3 gap-y-1 mt-2 text-xs font-semibold">
           <a href="#intro" class="text-sky-300 hover:text-white">1. עקרונות השיטה</a>
-          <a href="#atlas" class="text-sky-300 hover:text-white">2. אטלס אינטראקטיבי</a>
-          <a href="#pointsTable" class="text-sky-300 hover:text-white">3. טבלת 16 הנקודות</a>
-          <a href="#protocols" class="text-sky-300 hover:text-white">4. פרוטוקולים</a>
-          <a href="#technique" class="text-sky-300 hover:text-white">5. טכניקה ובטיחות</a>
-          <a href="#videos" class="text-sky-300 hover:text-white">6. סרטונים</a>
+          <a href="#foundations" class="text-sky-300 hover:text-white">2. יסודות תאורטיים</a>
+          <a href="#atlas" class="text-sky-300 hover:text-white">3. אטלס אינטראקטיבי</a>
+          <a href="#pointsTable" class="text-sky-300 hover:text-white">4. טבלת 16 הנקודות</a>
+          <a href="#methods" class="text-sky-300 hover:text-white">5. בחירת נקודות</a>
+          <a href="#diagnosis" class="text-sky-300 hover:text-white">6. אבחון</a>
+          <a href="#protocols" class="text-sky-300 hover:text-white">7. פרוטוקולים</a>
+          <a href="#cases" class="text-sky-300 hover:text-white">8. מקרים מהספר</a>
+          <a href="#technique" class="text-sky-300 hover:text-white">9. טכניקה ובטיחות</a>
+          <a href="#glossary" class="text-sky-300 hover:text-white">10. מילון מונחים</a>
+          <a href="#review" class="text-sky-300 hover:text-white">11. מקורות ופערים</a>
+          <a href="#videos" class="text-sky-300 hover:text-white">12. סרטונים</a>
         </nav>
       </div>
 
@@ -192,10 +243,22 @@
         </div>
         <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
           <h3 class="font-bold text-amber-300 mb-1.5">איך לעבוד עם המדריך</h3>
-          <p>באטלס (חלק 2) לוחצים על נקודה או על שריר כדי לראות מיקום, מישוש, מחט והתוויות. בטבלה (חלק 3) מופיעים כל 16 הנקודות עם תיאור המיקום וההתוויות לפי טבלה 1 בדיווח המקרה, וסימון הנקודות שבהן השתמשו לשיכוך כאב אצל מטופל 1 (P1) ומטופל 2 (P2). לחיצה על שורה בטבלה מציגה את הנקודה באטלס.</p>
+          <p>באטלס (חלק 3) לוחצים על נקודה או על שריר כדי לראות מיקום, מישוש, מחט והתוויות. בטבלה (חלק 4) מופיעים כל 16 הנקודות עם תיאור המיקום וההתוויות לפי טבלה 1 בדיווח המקרה, וסימון הנקודות שבהן השתמשו לשיכוך כאב אצל מטופל 1 (P1) ומטופל 2 (P2). לחיצה על שורה בטבלה מציגה את הנקודה באטלס. בכרטיס כל נקודה ושריר נוסף פאנל <strong class="text-amber-300">📖 לפי ספר המקור</strong> עם מיקום סטנדרטי, מבנה אנטומי בשכבות, התוויות, שרירים קשורים ומקרים קליניים. חלקים 2, 5, 6, 8, 10 ו-11 מבוססים על הספר; כל קוד נקודה (כמו <span class="text-yellow-300 font-bold">CA-4</span>) בהם פותח את הנקודה באטלס.</p>
         </div>
       </div>
       <p class="text-xs text-slate-500 mt-3"><strong class="text-slate-400">יחידות מידה:</strong> כל המרחקים נמדדים ב<strong class="text-slate-300">צון (寸)</strong> פרופורציונלי של המטופל. בתרגום של טבלה 1 הופיע "אינץ'" – הכוונה לצון.</p>
+    </div>
+  </section>
+
+  <!-- ==================== 2. FOUNDATIONS (book-derived) ==================== -->
+  <section id="foundations" class="max-w-7xl w-full mx-auto px-4 pb-6">
+    <div class="kb-section">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">2</span>
+        <h2 class="text-lg md:text-xl font-extrabold text-white">יסודות תאורטיים לפי ספר המקור</h2>
+      </div>
+      <p class="text-xs md:text-sm text-slate-400 mb-4">הגדרת השיטה, ששת היסודות התאורטיים שעליהם המחבר מבסס אותה, ושלושת רובדי ההתוויות. כל טענה מסומנת בעמוד המקור, ומבחינה בין רפואה סינית קלאסית, אנטומיה ביו-רפואית ותאוריית המחבר.</p>
+      <div id="foundationsBody"></div>
     </div>
   </section>
 
@@ -527,6 +590,8 @@
             <p class="text-xs text-slate-300 leading-relaxed mt-1"><strong class="text-slate-100">התוויות:</strong> <span id="detailStudyIndications"></span></p>
             <p class="text-xs text-slate-300 leading-relaxed mt-1"><strong class="text-slate-100">שימוש לשיכוך כאב בדיווח:</strong> <span id="detailStudyUse"></span></p>
           </div>
+          <!-- Book-derived details for the selected point (rendered by js/knowledge.js) -->
+          <div id="bookPointPanel" class="kb-panel"></div>
         </div>
 
         <div class="mt-4 pt-3 border-t border-slate-800">
@@ -576,6 +641,8 @@
             <p id="musclePointsDesc" class="text-slate-300 text-xs leading-relaxed mb-2"></p>
             <div id="musclePointChips" class="flex flex-wrap gap-1.5"></div>
           </div>
+          <!-- Book-derived muscle relations (rendered by js/knowledge.js) -->
+          <div id="bookMusclePanel" class="kb-panel"></div>
         </div>
 
         <div class="mt-3.5 pt-3 border-t border-slate-800">
@@ -592,10 +659,14 @@
   <section id="pointsTable" class="max-w-7xl w-full mx-auto px-4 pb-6">
     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl">
       <div class="flex items-center gap-2 mb-1">
-        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">3</span>
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">4</span>
         <h2 class="text-lg md:text-xl font-extrabold text-white">טבלת 16 הנקודות: מיקום, התוויות ושימוש בדיווח</h2>
       </div>
       <p class="text-xs md:text-sm text-slate-400 mb-4">נקודות הדיקור הסטנדרטיות בדיקור לחי, השימושים העיקריים שלהן, והנקודות ששימשו לשיכוך כאב בדיווח המקרה (טבלה 1). לחיצה על שורה מציגה את הנקודה באטלס.</p>
+      <label class="inline-flex items-center gap-2 text-xs text-amber-300 font-bold mb-3 cursor-pointer select-none">
+        <input id="tableBookToggle" type="checkbox" class="accent-amber-500 w-4 h-4">
+        📖 הצג בטבלה גם את הנוסח של ספר המקור (טבלה 3-5-1, עמ' 47–48) להשוואה
+      </label>
       <div class="md:rounded-xl md:overflow-hidden md:border md:border-slate-800">
         <table id="studyTable" class="w-full text-right border-collapse text-sm">
           <thead class="bg-slate-950 text-slate-300">
@@ -616,12 +687,41 @@
     </div>
   </section>
 
-  <!-- ==================== 4-6. PROTOCOLS, TECHNIQUE & VIDEOS ==================== -->
+
+  <!-- ==================== 5. METHODS (book-derived) ==================== -->
+  <section id="methods" class="max-w-7xl w-full mx-auto px-4 pb-6">
+    <div class="kb-section">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">5</span>
+        <h2 class="text-lg md:text-xl font-extrabold text-white">בחירת נקודות ועקרונות טיפול</h2>
+      </div>
+      <p class="text-xs md:text-sm text-slate-400 mb-4">כיצד המחבר מצרף נקודות: עקרונות היישום, שמונה שיטות הצירוף, שלוש תקופות הכאב ושיטות הדיקור המיוחדות. לחצו על קוד נקודה כדי לפתוח אותה באטלס.</p>
+      <div id="methodsBody"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 6. DIAGNOSIS (book-derived) ==================== -->
+  <section id="diagnosis" class="max-w-7xl w-full mx-auto px-4 pb-6">
+    <div class="kb-section">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">6</span>
+        <h2 class="text-lg md:text-xl font-extrabold text-white">אבחון: אבחון שרירים ואבחון בטן</h2>
+      </div>
+      <p class="text-xs md:text-sm text-slate-400 mb-4">בדיקור הלחי האבחון קודם לטיפול ומשמש גם לבדיקה חוזרת לאחר הדיקור. הסעיף מסכם את פרק 7 בספר – מבחני השרירים המפורטים (עמ' 106–139) נמצאים בספר המקור.</p>
+      <div id="diagnosisBody"></div>
+    </div>
+  </section>
+
+  <!-- ==================== 7-12. PROTOCOLS, CASES, TECHNIQUE, GLOSSARY, REVIEW & VIDEOS ==================== -->
   <section id="videosSection" class="max-w-7xl w-full mx-auto px-4 pb-10 space-y-6">
 
     <div id="protocols" class="flex items-center gap-2 -mb-2">
-      <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">4</span>
+      <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">7</span>
       <h2 class="text-lg md:text-xl font-extrabold text-white">פרוטוקולים קליניים</h2>
+    </div>
+    <div class="kb-warn !mt-0 text-xs leading-relaxed">
+      ⚠️ <strong>הערת מקור:</strong> שני הפרוטוקולים המלאים שלהלן (כאבי מחזור ופריון) אינם מופיעים בספר המקור של וואנג יונגז'ואו, ומקורם אינו מצוין באתר. הספר אינו מציג פרוטוקולים קבועים אלא עקרונות לבחירת נקודות (חלק 5) ו-101 מקרים מתועדים (חלק 8), ומדגיש שהמקרים "אינם מרשם תקני". הספר מונה הריון – במיוחד לאחר הפריה מלאכותית – בין התוויות הנגד (עמ' 156).
+      <button type="button" data-review="1" class="underline text-amber-200 hover:text-white">ראו פירוט הפערים</button>
     </div>
 
     <!-- Full Protocols Comparison Cards -->
@@ -656,6 +756,7 @@
           <button onclick="setProtocol('fertility'); document.getElementById('atlas').scrollIntoView({behavior:'smooth'});" class="text-xs bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-3 py-1 rounded-lg transition">הדגש נקודות במפה למעלה 👆</button>
         </div>
         <h3 class="text-lg font-extrabold text-white mb-2">🤰 פרוטוקול מלא לפריון ואיזון ציר הורמונלי (HPO Axis)</h3>
+        <p class="kb-warn !mt-0 mb-2">⚠️ לבדיקה: השלב "יום החזרת עוברים" בפרוטוקול זה עומד בסתירה לספר המקור, המונה הריון בעקבות הפריה מלאכותית בין התוויות הנגד (עמ' 156) ואינו ממליץ על דיקור הלחי בהריון (עמ' 190).</p>
         <ol class="space-y-2.5 text-xs md:text-sm text-slate-300 list-decimal list-inside">
           <li><strong class="text-white">עיקרון הטיפול בפריון:</strong> בניגוד לכאב חד-צדדי חריף, בטיפולי פריון המטרה היא מערכתית – ויסות ציר מוח-היפופיזה-שחלות (HPO), הרגעת מערכת העצבים הסימפתטית (הורדת קורטיזול וסטרס), ושיפור זרימת הדם העורקית לרחם ולשחלות.</li>
           <li><strong class="text-white">קבוצה א' – ויסות שלושת המחממים (3 הנקודות הצהובות - San Jiao):</strong>
@@ -672,10 +773,29 @@
 
     </div>
 
-    <!-- ==================== 5. TECHNIQUE & SAFETY ==================== -->
+    <!-- ==================== 8. CASE LIBRARY (book ch. 11) ==================== -->
+    <div id="cases" class="kb-section">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">8</span>
+        <h2 class="text-lg md:text-xl font-extrabold text-white">מאגר המקרים הקליניים מהספר</h2>
+      </div>
+      <p id="casesIntro" class="text-xs md:text-sm text-slate-400 mb-3"></p>
+      <div class="flex flex-wrap items-center gap-2 mb-3">
+        <input id="caseSearch" type="search" placeholder="חיפוש חופשי (למשל: סיאטיקה, חרדה)" class="kb-input flex-1 min-w-[12rem]">
+        <select id="caseLayer" class="kb-input" aria-label="סינון לפי רובד"></select>
+        <select id="caseRegion" class="kb-input" aria-label="סינון לפי אזור"></select>
+        <select id="casePoint" class="kb-input" aria-label="סינון לפי נקודה"></select>
+        <button id="caseReset" type="button" class="kb-input hover:border-amber-500">איפוס</button>
+        <span id="casesCount" class="text-xs text-slate-400 font-bold"></span>
+      </div>
+      <p class="text-[11px] text-slate-500 mb-3">הטקסט מובא כלשונו מהתרגום. תגיות הנקודות זוהו אוטומטית מתוך משפטי הטיפול – "נקודות המחמם המשולש" מסומנות כ-CA-2 עד CA-4; נקודות שהספר מתאר מחוץ ל-16 אזורי היסוד (למשל "נקודות השוק") אינן מסומנות.</p>
+      <div id="casesList" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 max-h-[80rem] overflow-y-auto custom-scroll pl-1"></div>
+    </div>
+
+    <!-- ==================== 9. TECHNIQUE & SAFETY ==================== -->
     <div id="technique" class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-xl scroll-mt-4">
       <div class="flex items-center gap-2 mb-3">
-        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">5</span>
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">9</span>
         <h2 class="text-lg md:text-xl font-extrabold text-white">טכניקת דיקור ובטיחות</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 leading-relaxed">
@@ -698,11 +818,40 @@
             <li><strong class="text-white">CA-5 ו-CA-6 (קדמית לאוזן):</strong> העורק הרקתי השטחי ועצב הפנים נמצאים באזור – דיקור שטחי בלבד.</li>
             <li>הפנים עשירות בכלי דם: אחרי הוצאת המחט לוחצים עם צמר גפן יבש כ-30 שניות כדי למנוע שטף דם.</li>
             <li>לא דוקרים דרך עור מודלק, פצעים, אקנה פעיל או הרפס.</li>
-            <li>זהירות בהריון, בנטילת מדללי דם, ובמטופלים עם נטייה להתעלפות – לטפל בשכיבה.</li>
+            <li><strong class="text-white">הריון ונטייה לדימום</strong> (כולל נטילת מדללי דם) מופיעים בספר המקור בין התוויות הנגד – ראו למטה. במטופלים עם נטייה להתעלפות – לטפל בשכיבה.</li>
             <li>כאב חריף, חדש או לא מוסבר מחייב אבחנה רפואית לפני שמטפלים בו כבעיה תפקודית.</li>
           </ul>
         </div>
       </div>
+      <!-- Book-derived needling parameters and contraindications -->
+      <div id="techniqueBook" class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"></div>
+    </div>
+
+    <!-- ==================== 10. GLOSSARY ==================== -->
+    <div id="glossary" class="kb-section">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-3">
+        <div class="flex items-center gap-2">
+          <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">10</span>
+          <h2 class="text-lg md:text-xl font-extrabold text-white">מילון מונחים</h2>
+        </div>
+        <input id="glossSearch" type="search" placeholder="חיפוש מונח (עברית או סינית)" class="kb-input md:w-72">
+      </div>
+      <p class="text-xs text-slate-400 mb-3">מונחי השיטה כפי שהם מוגדרים בספר המקור. מונחים המסומנים בקו מנוקד בטקסטים באתר מקשרים לכאן.</p>
+      <dl id="glossaryList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5"></dl>
+    </div>
+
+    <!-- ==================== 11. SOURCES & DISCREPANCIES ==================== -->
+    <div id="review" class="kb-section">
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">11</span>
+        <h2 class="text-lg md:text-xl font-extrabold text-white">מקורות והערות לבדיקה</h2>
+      </div>
+      <p class="text-xs md:text-sm text-slate-400 mb-3">
+        <strong class="text-slate-200">ספר המקור:</strong> "דיקור הלחי (颊针疗法)", וואנג יונגז'ואו (王永洲), הוצאת הבריאות העממית (人民卫生出版社) – תרגום עברי. מספרי העמודים (📖) הם לפי סימון העמודים בתרגום.
+        <strong class="text-slate-200">מקורות נוספים באתר:</strong> "טבלה 1 בדיווח המקרה" (P1/P2) ותיאורי המישוש והמחט באטלס הם תוכן האתר הקיים.
+        להלן פערים שזוהו בין תוכן האתר לבין הספר. הם לא תוקנו בשקט – כל פער מוצג כדי שגורם מקצועי יכריע.
+      </p>
+      <div id="reviewList" class="grid grid-cols-1 md:grid-cols-2 gap-3"></div>
     </div>
 
     <!-- Video Demonstrations Directory -->
@@ -710,7 +859,7 @@
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-4">
         <div>
           <h3 class="text-lg font-extrabold text-white flex items-center gap-2">
-            <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">6</span> <span class="text-red-500">▶️</span> סרטוני הדרכה והדגמות קליניות בדיקור לחי (YouTube)
+            <span class="px-2.5 py-0.5 rounded-md text-xs font-extrabold bg-sky-500 text-slate-950">12</span> <span class="text-red-500">▶️</span> סרטוני הדרכה והדגמות קליניות בדיקור לחי (YouTube)
           </h3>
           <p class="text-xs text-slate-400 mt-0.5">קישורים ישירים להרצאות והדגמות מעשיות של פרופ' וואנג יונג-ג'ואו (מייסד השיטה) ומטפלים מוסמכים המדגימים מישוש, שימוש במוליך והחדרה ללא כאב</p>
         </div>
@@ -758,7 +907,7 @@
   </section>
 
   <footer class="max-w-7xl w-full mx-auto px-4 pb-8 text-xs text-slate-500 leading-relaxed">
-    המדריך נועד ללימוד ולשימוש מטפלים מוסמכים ברפואה סינית. אינו תחליף להכשרה מעשית בשיטה או לאבחנה רפואית. מקורות: שיטת דיקור הלחי של פרופ' וואנג יונג-ג'ואו; טבלה 1 בדיווח המקרה (P1, P2).
+    המדריך נועד ללימוד ולשימוש מטפלים מוסמכים ברפואה סינית. אינו תחליף להכשרה מעשית בשיטה או לאבחנה רפואית. מקורות: הספר "דיקור הלחי (颊针疗法)" מאת וואנג יונגז'ואו (王永洲), הוצאת הבריאות העממית – תרגום עברי (ההפניות 📖 לעמודים); טבלה 1 בדיווח המקרה (P1, P2). התוכן אינו מוסיף המלצות קליניות מעבר למקורות; פערים בין המקורות מרוכזים בחלק 11.
   </footer>
 
   <script>
@@ -1568,5 +1717,9 @@
       setProtocol("all");
     });
   </script>
+  <!-- Knowledge layer: structured book data + renderer -->
+  <script src="data/book-content.js"></script>
+  <script src="data/book-cases.js"></script>
+  <script src="js/knowledge.js"></script>
 </body>
 </html>
