@@ -1,0 +1,11 @@
+{
+  "name": "cheek-atlas-offline-build",
+  "private": true,
+  "description": "Builds the offline HTML + PDF editions of the Cheek Acupuncture Atlas",
+  "scripts": {
+    "build": "node build.js --out ../../offline --src"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

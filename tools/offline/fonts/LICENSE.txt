@@ -1,0 +1,2 @@
+Heebo (c) The Heebo Project Authors — SIL Open Font License 1.1, https://openfontlicense.org
+Downloaded from Google Fonts (variable font, hebrew + latin subsets).
