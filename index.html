@@ -180,6 +180,10 @@
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
           <span>קווי חיווי ותוויות (פעיל)</span>
         </button>
+        <button id="toggleGuidesBtn" onclick="toggleLayer('guidesLayer')" class="px-2.5 py-1.5 rounded-lg bg-violet-500/20 text-violet-300 border border-violet-500/40 font-medium hover:bg-violet-500/30 transition flex items-center gap-1.5" style="opacity: 0.5;">
+          <span class="w-2 h-2 rounded-full bg-violet-400"></span>
+          <span>קווי בנייה לפי טבלה 1 (מוסתר)</span>
+        </button>
         <button id="toggleOrigRefBtn" onclick="toggleLayer('origRefLayer')" class="px-2.5 py-1.5 rounded-lg bg-slate-700/60 text-slate-300 border border-slate-600 font-medium hover:bg-slate-700 transition flex items-center gap-1.5" style="opacity: 0.65;">
           <span class="w-2 h-2 rounded-full bg-slate-400"></span>
           <span>תמונת מקור להשוואה (מוסתר)</span>
@@ -229,7 +233,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm text-slate-300 leading-relaxed">
         <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
           <h3 class="font-bold text-amber-300 mb-1.5">מיפוי הולוגרפי</h3>
-          <p>השיטה פותחה בסין על ידי פרופ' וואנג יונג-ג'ואו (王永洲). הלחי נתפסת כ"מיקרו-מערכת" שעליה ממופה הגוף כולו: <strong class="text-white">הראש</strong> ברקה, <strong class="text-white">שלושת המחממים (三焦)</strong> לאורך הגבול הקדמי של שריר המלעס, <strong class="text-white">עמוד השדרה</strong> לאורך השפה האחורית של ענף הלסת, <strong class="text-white">הגפה העליונה</strong> על עצם הלחי וקפל החיוך, ו<strong class="text-white">הגפה התחתונה</strong> לאורך גוף הלסת והסנטר.</p>
+          <p>השיטה פותחה בסין על ידי פרופ' וואנג יונג-ג'ואו (王永洲). הלחי נתפסת כ"מיקרו-מערכת" שעליה ממופה הגוף כולו: <strong class="text-white">הראש</strong> ברקה, <strong class="text-white">שלושת המחממים (三焦)</strong> בקו אנכי מתחת לקשת הזיגומה ועד הקו האלכסוני של הלסת, <strong class="text-white">עמוד השדרה</strong> משורש קשת הזיגומה שלפני האוזן ועד זווית הלסת, <strong class="text-white">הגפה העליונה</strong> מקשת הזיגומה דרך עצם הלחי וקפל האף-שפה אל השפה העליונה, ו<strong class="text-white">הגפה התחתונה</strong> מזווית הלסת אל הסנטר (CV-24).</p>
         </div>
         <div class="bg-slate-950/70 border border-slate-800 rounded-xl p-4">
           <h3 class="font-bold text-amber-300 mb-1.5">16 נקודות ב-5 קבוצות</h3>
@@ -277,7 +281,7 @@
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-green-500 border border-green-300 inline-block"></span>גפה עליונה (CA-9..12)</span>
           <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded-full bg-sky-500 border border-sky-300 inline-block"></span>גפה תחתונה (CA-13..16)</span>
         </div>
-        <span class="text-slate-400 text-[11px]">מכויל 1:1 לתמונת המקור (1000×828)</span>
+        <span class="text-slate-400 text-[11px]">מיקום לפי טבלה 1 (Wang &amp; Wu) · 1 צון ≈ רוחב אגודל</span>
       </div>
 
       <!-- SVG Canvas Container -->
@@ -340,157 +344,162 @@
                      C 805,165 705,82 555,86 Z"
                   fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-opacity="0.45" />
             <!-- Nasolabial Groove Reference -->
-            <path d="M 358,468 Q 386,490 398,548" fill="none" stroke="#f8fafc" stroke-width="1.6" stroke-dasharray="4,3" opacity="0.65" />
+            <path d="M 366,466 Q 380,492 400,548" fill="none" stroke="#f8fafc" stroke-width="1.6" stroke-dasharray="4,3" opacity="0.65" />
           </g>
 
-          <!-- ==================== LAYER 2: SKELETAL LANDMARKS (ALIGNED TO 1000x828 3D HEAD) ==================== -->
+          <!-- ==================== LAYER 2: SKELETAL LANDMARKS (TRACED ON THE 1000x828 3D HEAD, USED TO DERIVE THE POINTS OF TABLE 1) ==================== -->
           <g id="bonesLayer">
-            <!-- Zygomatic Bone & Arch (passing through CA-10 at 443,428 and CA-9 at 513,403 to TMJ at 612,412) -->
-            <path d="M 412,378
-                     C 432,395 462,398 513,394
-                     L 612,392
-                     L 612,414
-                     L 515,416
-                     C 482,425 462,442 438,442
-                     C 418,442 410,412 412,378 Z"
+            <!-- Zygomatic bone + zygomatic arch: upper edge y≈391, lower edge y≈417, root just in front of the ear (x≈622); lowest point of the zygomatic bone at (456,444) -->
+            <path d="M 446,322
+                     L 458,326
+                     C 462,352 468,378 482,391
+                     L 624,391
+                     C 631,396 631,412 622,418
+                     L 492,417
+                     C 476,420 466,432 456,444
+                     C 440,436 420,412 408,388
+                     C 422,386 436,378 440,364
+                     C 442,350 442,334 446,322 Z"
                   fill="url(#boneGrad)" stroke="#38bdf8" stroke-width="1.8" stroke-dasharray="6,2" />
 
-            <!-- Temporozygomatic suture at CA-9 (513.4, 402.9) -->
-            <path d="M 512,393 L 516,403 L 511,415" fill="none" stroke="#7dd3fc" stroke-width="2.2" />
+            <!-- Temporozygomatic suture (CA-9 sits at its midpoint) -->
+            <path d="M 525,391 L 519,404 L 515,417" fill="none" stroke="#7dd3fc" stroke-width="2.2" />
 
-            <!-- Mandible: Condyle (612,418), Coronoid Process (522,408), Ramus posterior border (CA-6 -> CA-7 -> CA-8), Body inferior border (CA-8 -> CA-14 -> CA-15 -> Chin) -->
-            <path d="M 605,412
-                     C 616,412 620,422 616,435
-                     L 608,496
-                     L 588,564
-                     C 582,575 565,582 542,590
-                     L 474,616
-                     L 380,642
-                     C 355,648 345,635 348,612
-                     L 362,592
-                     L 512,535
-                     L 516,445
-                     L 524,408
-                     L 548,442
-                     C 568,452 590,445 605,412 Z"
+            <!-- Mandible: condyle (TMJ) → posterior border of ramus → angle (604,568) → inferior border → chin → alveolar border → anterior border of ramus → coronoid process → mandibular notch -->
+            <path d="M 608,417
+                     C 620,415 626,428 618,440
+                     C 621,472 620,520 612,548
+                     C 609,560 603,570 594,577
+                     C 560,597 470,630 412,651
+                     C 396,657 378,660 366,654
+                     C 350,646 344,626 345,606
+                     L 349,584
+                     C 400,568 470,557 527,552
+                     C 527,510 531,450 540,402
+                     L 547,421
+                     Q 562,442 580,443
+                     Q 598,443 606,432 Z"
                   fill="url(#boneGrad)" stroke="#38bdf8" stroke-width="1.6" stroke-dasharray="4,3" />
 
-            <!-- TMJ Capsule in front of Tragus (around CA-6: 612.5, 422.9) -->
-            <ellipse cx="613" cy="420" rx="12" ry="9" fill="#0284c7" fill-opacity="0.38" stroke="#7dd3fc" stroke-width="1.6" />
-            <text x="535" y="385" fill="#bae6fd" font-size="11" font-weight="700" text-anchor="middle">קשת הזיגומה (Zygomatic Arch)</text>
+            <!-- External (anterior) oblique line of the mandible: continues the anterior border of the ramus forward onto the body (CA-4) -->
+            <path d="M 531,505 C 531,528 526,544 506,558 C 476,576 436,594 400,610" fill="none" stroke="#7dd3fc" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.85" />
+
+            <!-- TMJ capsule in front of the tragus (CA-6 lies below it) -->
+            <ellipse cx="614" cy="427" rx="11" ry="8" fill="#0284c7" fill-opacity="0.38" stroke="#7dd3fc" stroke-width="1.6" />
+            <text x="588" y="409" fill="#bae6fd" font-size="9.5" font-weight="700" text-anchor="middle">קשת הזיגומה</text>
           </g>
 
-          <!-- ==================== LAYER 3: THE 7 KEY MUSCLES (MAPPED TO EXACT 3D ANATOMY & 16 POINTS) ==================== -->
+          <!-- ==================== LAYER 3: THE 7 KEY MUSCLES (DRAWN OVER THE SAME LANDMARKS) ==================== -->
           <g id="allMusclesLayer">
-            <!-- 1. Temporalis Muscle (Covers temple around CA-1 at 554.2,328.4 and inserts via CA-9/CA-2 to coronoid process) -->
+            <!-- 1. Temporalis: fan over the temple (CA-1), converging under the arch onto the coronoid process (CA-2) -->
             <g id="muscle-temporalis" class="muscle-shape" onclick="selectMuscle('temporalis')">
-              <path d="M 465,255
-                       C 505,195 605,195 655,255
-                       C 678,285 665,345 622,385
-                       L 542,428
-                       L 512,402
-                       C 475,355 448,300 465,255 Z"
+              <path d="M 468,262
+                       C 508,198 612,198 662,262
+                       C 684,300 670,360 630,390
+                       L 560,402
+                       L 540,404
+                       C 500,362 452,312 468,262 Z"
                     fill="#a855f7" fill-opacity="0.28" stroke="#c084fc" stroke-width="2" />
-              <line x1="490" y1="265" x2="525" y2="402" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
-              <line x1="540" y1="235" x2="538" y2="410" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
-              <line x1="595" y1="240" x2="555" y2="400" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
-              <line x1="635" y1="275" x2="575" y2="395" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
-              <text x="562" y="275" fill="#f3e8ff" font-size="12.5" font-weight="800" text-anchor="middle">1. שריר הרקה (Temporalis)</text>
+              <line x1="492" y1="268" x2="538" y2="400" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
+              <line x1="545" y1="232" x2="545" y2="400" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
+              <line x1="600" y1="238" x2="552" y2="400" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
+              <line x1="642" y1="276" x2="560" y2="398" stroke="#e9d5ff" stroke-width="1.2" opacity="0.45" />
+              <text x="565" y="280" fill="#f3e8ff" font-size="12.5" font-weight="800" text-anchor="middle">1. שריר הרקה (Temporalis)</text>
             </g>
 
-            <!-- 6. Lateral Pterygoid & Coronoid Process Zone (Between CA-2 at 540.7,430.6 and CA-5/CA-6 at 612.5,422.9) -->
+            <!-- 6. Lateral pterygoid & TMJ zone: deep to the arch, between the coronoid process (CA-2) and the condyle (CA-6) -->
             <g id="muscle-pterygoid" class="muscle-shape" onclick="selectMuscle('pterygoid')">
-              <path d="M 518,405
-                       L 618,362
-                       L 615,438
-                       L 525,445 Z"
+              <path d="M 547,418
+                       L 622,418
+                       L 626,446
+                       L 562,446 Z"
                     fill="#06b6d4" fill-opacity="0.26" stroke="#22d3ee" stroke-width="1.8" stroke-dasharray="4,2" />
-              <text x="572" y="402" fill="#cffafe" font-size="10" font-weight="700" text-anchor="middle">6. פטריגואיד ו-TMJ</text>
+              <text x="578" y="441" fill="#cffafe" font-size="9" font-weight="700" text-anchor="middle">6. פטריגואיד</text>
             </g>
 
-            <!-- 3. Buccinator Muscle (Soft cheek wall anterior to Masseter border CA-2..CA-4 toward mouth corner 392,545) -->
+            <!-- 3. Buccinator: deep cheek wall in front of the ramus, between the jaws, toward the mouth corner -->
             <g id="muscle-buccinator" class="muscle-shape" onclick="selectMuscle('buccinator')">
-              <path d="M 392,485
-                       L 538,448
-                       L 527,542
-                       L 392,552 Z"
+              <path d="M 398,506
+                       C 440,494 490,490 526,496
+                       L 530,560
+                       C 490,568 440,566 400,556
+                       C 392,540 392,520 398,506 Z"
                     fill="#f97316" fill-opacity="0.30" stroke="#fb923c" stroke-width="2" />
-              <line x1="402" y1="500" x2="532" y2="468" stroke="#ffedd5" stroke-width="1.2" opacity="0.5" />
-              <line x1="400" y1="520" x2="530" y2="500" stroke="#ffedd5" stroke-width="1.2" opacity="0.5" />
-              <line x1="402" y1="538" x2="525" y2="530" stroke="#ffedd5" stroke-width="1.2" opacity="0.5" />
-              <text x="462" y="512" fill="#ffedd5" font-size="11" font-weight="800" text-anchor="middle">3. השריר המחצצר</text>
-              <text x="462" y="526" fill="#ffedd5" font-size="9.5" font-weight="600" text-anchor="middle">(Buccinator)</text>
+              <line x1="410" y1="512" x2="524" y2="504" stroke="#ffedd5" stroke-width="1.2" opacity="0.5" />
+              <line x1="404" y1="530" x2="526" y2="528" stroke="#ffedd5" stroke-width="1.2" opacity="0.5" />
+              <line x1="406" y1="548" x2="528" y2="552" stroke="#ffedd5" stroke-width="1.2" opacity="0.5" />
+              <text x="462" y="525" fill="#ffedd5" font-size="11" font-weight="800" text-anchor="middle">3. השריר המחצצר</text>
+              <text x="462" y="539" fill="#ffedd5" font-size="9.5" font-weight="600" text-anchor="middle">(Buccinator)</text>
             </g>
 
-            <!-- 2. Masseter Muscle (Anterior border strictly along CA-2 [540.7,430.6] -> CA-3 [533.8,481.0] -> CA-4 [526.9,535.9]; Posterior border along CA-6 -> CA-7 -> CA-8; Belly at CA-13 [562.3,548.8]) -->
+            <!-- 2. Masseter: from the lower edge of the zygomatic bone/arch down to the angle and lateral ramus (CA-2..CA-4 on its anterior part, CA-7/CA-8 near the posterior border of the ramus, CA-13 on the masseteric tuberosity) -->
             <g id="muscle-masseter" class="muscle-shape" onclick="selectMuscle('masseter')">
-              <path d="M 542,412
-                       L 612,416
-                       L 608,496
-                       L 586,564
-                       L 525,545
-                       Z"
-                    fill="#f43f5e" fill-opacity="0.38" stroke="#fb7185" stroke-width="2.4" />
-              <line x1="556" y1="416" x2="544" y2="548" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
-              <line x1="576" y1="418" x2="564" y2="554" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
-              <line x1="596" y1="420" x2="582" y2="558" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
-              <!-- Highlighted Anterior Border of Masseter (San Jiao Line: CA-2 -> CA-3 -> CA-4) -->
-              <line x1="542" y1="415" x2="525" y2="545" stroke="#fde047" stroke-width="3.2" stroke-dasharray="6,3" />
-              <text x="572" y="485" fill="#fff1f2" font-size="11.5" font-weight="800" text-anchor="middle">2. שריר המלעס</text>
-              <text x="572" y="500" fill="#ffe4e6" font-size="10" font-weight="700" text-anchor="middle">(Masseter)</text>
+              <path d="M 462,438
+                       C 500,420 560,418 604,422
+                       L 614,442
+                       C 618,480 616,528 608,556
+                       C 604,567 599,573 592,578
+                       C 568,590 545,602 522,611
+                       C 512,560 488,490 462,438 Z"
+                    fill="#f43f5e" fill-opacity="0.34" stroke="#fb7185" stroke-width="2.4" />
+              <line x1="482" y1="436" x2="532" y2="606" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
+              <line x1="520" y1="426" x2="556" y2="598" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
+              <line x1="560" y1="424" x2="580" y2="588" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
+              <line x1="598" y1="428" x2="602" y2="560" stroke="#ffe4e6" stroke-width="1.3" opacity="0.5" />
+              <text x="587" y="464" fill="#fff1f2" font-size="11" font-weight="800" text-anchor="middle">2. המלעס</text>
+              <text x="587" y="477" fill="#ffe4e6" font-size="9.5" font-weight="700" text-anchor="middle">(Masseter)</text>
             </g>
 
-            <!-- 4. Zygomaticus Major & Minor (From CA-10 [442.8,428.2] & CA-9 [513.4,402.9] down to CA-11 [385.8,478.7] and mouth corner) -->
+            <!-- 4. Zygomaticus major & minor: from the zygomatic bone (around CA-10) down to the mouth corner, passing near CA-11 -->
             <g id="muscle-zygomaticus" class="muscle-shape" onclick="selectMuscle('zygomaticus')">
-              <path d="M 442,414
-                       L 512,402
-                       L 402,525
-                       L 382,482 Z"
-                    fill="#ec4899" fill-opacity="0.32" stroke="#f472b6" stroke-width="2" />
-              <line x1="455" y1="415" x2="388" y2="488" stroke="#fce7f3" stroke-width="1.2" opacity="0.55" />
-              <line x1="488" y1="410" x2="398" y2="510" stroke="#fce7f3" stroke-width="1.2" opacity="0.55" />
-              <text x="442" y="462" fill="#fdf2f8" font-size="10.5" font-weight="800" text-anchor="middle" transform="rotate(-38 442 462)">4. שרירי הזיגומה</text>
+              <path d="M 438,398
+                       L 482,424
+                       L 404,552
+                       L 376,500 Z"
+                    fill="#ec4899" fill-opacity="0.30" stroke="#f472b6" stroke-width="2" />
+              <line x1="452" y1="408" x2="388" y2="514" stroke="#fce7f3" stroke-width="1.2" opacity="0.55" />
+              <line x1="470" y1="418" x2="398" y2="540" stroke="#fce7f3" stroke-width="1.2" opacity="0.55" />
+              <text x="428" y="474" fill="#fdf2f8" font-size="10" font-weight="800" text-anchor="middle" transform="rotate(-58 428 474)">4. שרירי הזיגומה</text>
             </g>
 
-            <!-- 5. Orbicularis Oris & Levator Labii (Around CA-11 [385.8,478.7] and CA-12 [352.9,507.1]) -->
+            <!-- 5. Orbicularis oris & levator labii: around the lips (CA-12 on the upper lip, CA-11 at its upper-lateral edge) -->
             <g id="muscle-orbicularis" class="muscle-shape" onclick="selectMuscle('orbicularis')">
-              <path d="M 345,472
-                       L 392,475
-                       L 398,562
-                       L 325,562
-                       L 318,515 Z"
-                    fill="#14b8a6" fill-opacity="0.32" stroke="#2dd4bf" stroke-width="2" />
-              <text x="358" y="555" fill="#ccfbf1" font-size="9.5" font-weight="700" text-anchor="middle">5. חוג הפה</text>
+              <path d="M 332,488
+                       L 366,484
+                       C 384,500 396,526 400,550
+                       C 396,568 380,580 352,585
+                       L 338,582
+                       C 328,572 322,560 326,550
+                       L 334,536
+                       C 322,528 316,518 318,512
+                       C 322,502 326,494 332,488 Z"
+                    fill="#14b8a6" fill-opacity="0.30" stroke="#2dd4bf" stroke-width="2" />
+              <text x="364" y="566" fill="#ccfbf1" font-size="9.5" font-weight="700" text-anchor="middle">5. חוג הפה</text>
             </g>
 
-            <!-- 7. Mentalis & Depressors (Along lower jaw and chin: CA-14 [473.7,614.2], CA-15 [379.7,634.5], CA-16 [360.6,620.3]) -->
+            <!-- 7. Mentalis & depressors: chin region around CV-24 (CA-15, CA-16) -->
             <g id="muscle-mentalis" class="muscle-shape" onclick="selectMuscle('mentalis')">
-              <path d="M 385,562
-                       L 488,605
-                       L 475,625
-                       L 378,645
-                       L 344,630
-                       L 344,580 Z"
-                    fill="#10b981" fill-opacity="0.32" stroke="#34d399" stroke-width="2" />
-              <text x="415" y="605" fill="#d1fae5" font-size="10.5" font-weight="800" text-anchor="middle">7. שרירי הסנטר והלסת</text>
+              <path d="M 348,588
+                       C 362,586 382,576 398,560
+                       C 420,582 440,610 452,638
+                       L 412,652
+                       C 396,658 378,660 366,654
+                       C 350,646 344,626 345,606 Z"
+                    fill="#10b981" fill-opacity="0.30" stroke="#34d399" stroke-width="2" />
+              <text x="400" y="633" fill="#d1fae5" font-size="10" font-weight="800" text-anchor="middle">7. שרירי הסנטר</text>
             </g>
           </g>
 
-          <!-- ==================== LAYER 4: EXACT REFERENCE CALLOUT LINES & HOLOGRAPHIC TRACKS ==================== -->
+          <!-- ==================== LAYER 4: CALLOUT LINES & HOLOGRAPHIC TRACKS (DRAWN BY JS FROM THE POINT COORDINATES) ==================== -->
           <g id="referenceLinesLayer">
-            <!-- Holographic anatomical tracks connecting each group -->
-            <!-- Spine Track (Red): CA-5 -> CA-6 -> CA-7 -> CA-8 -->
-            <polyline points="619.0,361.5 612.5,422.9 608.3,496.4 584.9,559.9" fill="none" stroke="#ef4444" stroke-width="2" stroke-dasharray="4,4" opacity="0.75" />
-            <!-- San Jiao Track (Yellow): CA-2 -> CA-3 -> CA-4 -->
-            <polyline points="540.7,430.6 533.8,481.0 526.9,535.9" fill="none" stroke="#facc15" stroke-width="2.2" stroke-dasharray="5,3" opacity="0.8" />
-            <!-- Upper Limb Track (Green): CA-9 -> CA-10 -> CA-11 -> CA-12 -->
-            <polyline points="513.4,402.9 442.8,428.2 385.8,478.7 352.9,507.1" fill="none" stroke="#22c55e" stroke-width="2" stroke-dasharray="4,3" opacity="0.75" />
-            <!-- Lower Limb Track (Blue): CA-13 -> CA-14 -> CA-15 -> CA-16 -->
-            <polyline points="562.3,548.8 473.7,614.2 379.7,634.5 360.6,620.3" fill="none" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="4,3" opacity="0.75" />
-
-            <!-- Dynamic Callout Lines & Labels Group (Rendered by JS to match 68010.jpg 1:1) -->
+            <!-- Holographic tracks: spine (CA-5→CA-8), San Jiao (CA-2→CA-4), upper limb (CA-9→CA-12), lower limb (CA-13→CA-16) -->
+            <g id="tracksGroup"></g>
+            <!-- Callout lines & labels -->
             <g id="calloutLinesGroup"></g>
           </g>
+
+          <!-- ==================== LAYER 4B: CONSTRUCTION GUIDES — THE LANDMARKS AND LINES OF TABLE 1 (TOGGLEABLE, DRAWN BY JS) ==================== -->
+          <g id="guidesLayer" style="display: none;"></g>
 
           <!-- ==================== LAYER 5: THE 16 PRECISION ACUPUNCTURE POINTS ==================== -->
           <g id="pointsLayer"></g>
@@ -501,7 +510,7 @@
       <!-- Bottom Quick-Reference Bar -->
       <div class="px-4 py-3 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400">
         <div>
-          <strong class="text-amber-400">דיוק אנטומי לפי תמונת המקור:</strong> הנקודות הצהובות הגדולות (<span class="text-yellow-300 font-bold">CA-2, CA-3, CA-4</span>) יושבות על הגבול הקדמי של שריר המלעס, הנקודה הכחולה <span class="text-sky-400 font-bold">CA-13 (ירך)</span> יושבת בבטן המלעס בין <span class="text-yellow-300 font-bold">CA-4</span> ל-<span class="text-red-400 font-bold">CA-8 (סקרום)</span>, ונקודות הגפה העליונה הירוקות (<span class="text-green-400 font-bold">CA-9..12</span>) יורדות מקשת הזיגומה אל השפה העליונה.
+          <strong class="text-amber-400">מיקום לפי טבלה 1 (Wang &amp; Wu):</strong> כל נקודה מחושבת מסימני הייחוס שבטבלה – קשת הזיגומה, הזיז הקורונואידי, מפרק הלסת, זווית הלסת, זווית העין, עצם הלחי, הנחיר, השפה העליונה ו-CV-24 (承浆). למשל <span class="text-yellow-300 font-bold">CA-3</span> באמצע בין <span class="text-yellow-300 font-bold">CA-2</span> ל-<span class="text-yellow-300 font-bold">CA-4</span>, <span class="text-red-400 font-bold">CA-8</span> ו-<span class="text-sky-400 font-bold">CA-13</span> חצי צון וצון אחד מזווית הלסת, ו-<span class="text-sky-400 font-bold">CA-14</span> באמצע בין זווית הלסת ל-CV-24. כדי לראות את סימני הייחוס ואת הקווים שמהם נגזרת כל נקודה, הפעילו את <strong class="text-violet-300">"קווי בנייה לפי טבלה 1"</strong>. האיור הוא מודל להמחשה: על המטופל מודדים בצון שלו (רוחב האגודל) וממששים את הסימנים הגרמיים.
         </div>
       </div>
     </div>
@@ -736,12 +745,12 @@
         <h3 class="text-lg font-extrabold text-white mb-2">🌸 פרוטוקול מלא לכאבי מחזור (דיסמנוריאה) וכאב שחלתי</h3>
         <ol class="space-y-2.5 text-xs md:text-sm text-slate-300 list-decimal list-inside">
           <li><strong class="text-white">שלב 1 – אבחנת בטן (Abdominal Palpation):</strong> המטופלת שוכבת על הגב. ממששים את הבטן התחתונה (מתחת לטבור: אזור <code class="text-amber-300">CV4/CV6</code> באמצע, ואזור השחלות <code class="text-amber-300">ST28/ST29/Zigong</code> משמאל ומימין). מזהים באיזה צד יש רגישות, נוקשות או כאב חד יותר.</li>
-          <li><strong class="text-white">שלב 2 – מחט ליבה ראשונה (<code class="text-yellow-300">CA-4 מחמם תחתון</code>):</strong> מבקשים מהמטופלת להדק שיניים, מאתרים את הנקודה הצהובה התחתונה בגבול הקדמי-תחתון של שריר המלעס (Masseter) בגובה קו הפה התחתון. אם הכאב רק בשחלה השמאלית – דוקרים ב<strong>לחי שמאל בלבד</strong>. אם הכאב במרכז הרחם או דו-צדדי – דוקרים בשתי הלחיים.</li>
+          <li><strong class="text-white">שלב 2 – מחט ליבה ראשונה (<code class="text-yellow-300">CA-4 מחמם תחתון</code>):</strong> מבקשים מהמטופלת להדק שיניים, מאתרים את הנקודה הצהובה התחתונה על הקו האלכסוני הקדמי של הלסת התחתונה – במקום שבו השפה הקדמית של ענף הלסת עוברת לגוף הלסת (בערך בגובה זווית הפה). אם הכאב רק בשחלה השמאלית – דוקרים ב<strong>לחי שמאל בלבד</strong>. אם הכאב במרכז הרחם או דו-צדדי – דוקרים בשתי הלחיים.</li>
           <li><strong class="text-white">שלב 3 – בדיקת אימות מיידית:</strong> לוחצים שוב על הבטן התחתונה. ב-80% מהמקרים הכאב יורד מיד.</li>
           <li><strong class="text-white">שלב 4 – מחט שנייה ושלישית לפי הקרנת הכאב:</strong>
             <ul class="list-disc list-inside pr-4 mt-1 space-y-1 text-slate-400">
-              <li>אם נשאר כאב שמקרין לאגן או לעצם הזנב: מוסיפים <strong class="text-red-400">CA-8 (סקרום)</strong> בגבול האחורי-תחתון של שריר המלעס (ליד זווית הלסת).</li>
-              <li>אם יש כאב גב תחתון נלווה לווסת: מוסיפים <strong class="text-red-400">CA-7 (מותן)</strong> מתחת לתנוך האוזן על השפה האחורית של הלסת.</li>
+              <li>אם נשאר כאב שמקרין לאגן או לעצם הזנב: מוסיפים <strong class="text-red-400">CA-8 (סקרום)</strong> חצי צון קדמית ומעל לזווית הלסת.</li>
+              <li>אם יש כאב גב תחתון נלווה לווסת: מוסיפים <strong class="text-red-400">CA-7 (מותן)</strong> באמצע בין CA-6 ל-CA-8 (בערך בגובה תחתית תנוך האוזן).</li>
               <li>אם יש בחילות, נפיחות בטנית או גודש בחזה (PMS): מוסיפים <strong class="text-yellow-300">CA-3 (מחמם אמצעי)</strong> בנקודה הצהובה האמצעית.</li>
             </ul>
           </li>
@@ -921,7 +930,7 @@
         color: "#f43f5e",
         anatomy: "מתחיל מהגבול התחתון של קשת הזיגומה (עצם הלחי) ויורד למטה ואחורה עד לזווית הלסת התחתונה (Mandibular Angle) ולחלק החיצוני של ענף הלסת (Ramus).",
         palpation: "בקש מהמטופל לנשוך/להדק שיניים חזק – השריר המלבני יקפוץ מיד מתחת לאצבעותיך בחלק האחורי של הלחי. משש את ה'מדרגה' הקדמית שלו (הגבול הקדמי) ואת הבליטה המרכזית שלו.",
-        pointsDesc: "זהו 'מגדלור המיפוי' החשוב ביותר בדיקור לחי! לאורך הגבול הקדמי שלו יושבים שלושת המחממים בצהוב (CA-2, CA-3, CA-4), על הגבול האחורי שלו יושבים המותן והסקרום באדום (CA-7, CA-8), ובלב הבטן השרירית התחתונה שלו (בין CA-4 ל-CA-8) יושבת נקודת הירך בכחול (CA-13).",
+        pointsDesc: "זהו 'מגדלור המיפוי' החשוב ביותר בדיקור לחי! שלושת המחממים בצהוב (CA-2, CA-3, CA-4) יושבים על החלק הקדמי שלו – מהזיז הקורונואידי שמתחת לקשת הזיגומה (CA-2) ועד הקו האלכסוני של הלסת (CA-4); המותן והעצה באדום (CA-7, CA-8) סמוכים לשפה האחורית של ענף הלסת; ונקודת הירך בכחול (CA-13) יושבת על בליטת המלעס, צון אחד קדמית ומעל לזווית הלסת.",
         relatedPoints: ["CA-2", "CA-3", "CA-4", "CA-7", "CA-8", "CA-13"]
       },
       {
@@ -932,7 +941,7 @@
         color: "#a855f7",
         anatomy: "שריר רחב דמוי מניפה המכסה את עצם הרקה (מעל קשת הזיגומה). סיביו מתכנסים למטה, עוברים מתחת לקשת הזיגומה ומתחברים לזיז הוויי (Coronoid Process) של הלסת התחתונה.",
         palpation: "הנח אצבעות על הרקה (מעל עצם הלחי, בגובה קו העין) ובקש מהמטופל להדק שיניים – תרגיש את המניפה השרירית מתכווצת. הגיד התחתון שלו מתחבר בדיוק באזור נקודת המחמם העליון (CA-2).",
-        pointsDesc: "על הבטן השרירית של הרקה בגובה העין יושבת נקודת הראש הסגולה הגדולה (CA-1), מעל קשת הזיגומה יושבת נקודת הכתף (CA-9), ובחיבור הגיד לזיז הוויי של הלסת יושבת נקודת המחמם העליון (CA-2).",
+        pointsDesc: "על הבטן השרירית של הרקה, צון אחד מעל אמצע קשת הזיגומה, יושבת נקודת הראש הסגולה הגדולה (CA-1); על קשת הזיגומה עצמה (התפר הרקתי-זיגומטי, שעליו נאחזת הפאשיה של הרקה) יושבת נקודת הכתף (CA-9); ובשפה האחורית של הזיז הקורונואידי, שאליו נאחז גיד הרקה, יושבת נקודת המחמם העליון (CA-2).",
         relatedPoints: ["CA-1", "CA-2", "CA-9"]
       },
       {
@@ -943,7 +952,7 @@
         color: "#f97316",
         anatomy: "השריר העמוק המרכיב את הדופן הרכה של הלחי ('השקע של הלחי'). עובר אופקית מהלסת העליונה והתחתונה (מול השיניים הטוחנות) קדימה אל זווית הפה, ממוקם ממש קדמית לשריר המלעס.",
         palpation: "זהו האזור הרך של הלחי שלתוכו האצבע שוקעת ברגע שמחליקים קדימה משריר המלעס הקשה. הוא פועל כשמנפחים את הלחיים או שואבים אותן פנימה.",
-        pointsDesc: "שלושת המחממים הצהובים (CA-2, CA-3, CA-4) נדקרים לאורך התפר הפאשיאלי שבין הגבול הקדמי של שריר המלעס לבין השריר המחצצר.",
+        pointsDesc: "בשכבה העמוקה של המחמם האמצעי והתחתון (CA-3, CA-4) נמצאת כרית השומן של הלחי, הצמודה לשריר המחצצר שבעומק; המחמם העליון (CA-2) נמצא גבוה יותר, מתחת לקשת הזיגומה.",
         relatedPoints: ["CA-2", "CA-3", "CA-4"]
       },
       {
@@ -987,12 +996,12 @@
         color: "#10b981",
         anatomy: "שרירים הנאחזים לאורך הגבול התחתון של גוף הלסת התחתונה (Mandibular Body) ועולים אל זווית הפה, השפה התחתונה והסנטר.",
         palpation: "משש לאורך העצם התחתונה של הלסת מאזור שריר המלעס קדימה אל צידי הסנטר מתחת לזווית הפה והשפה התחתונה.",
-        pointsDesc: "לאורך אחיזת השרירים הללו ממוקמות 3 מנקודות הגפה התחתונה הכחולות: ברך (CA-14) באמצע גוף הלסת, וקרסול (CA-15) וכף רגל (CA-16) בצד הסנטר.",
+        pointsDesc: "לאורך אחיזת השרירים הללו ממוקמות 3 מנקודות הגפה התחתונה הכחולות: ברך (CA-14) באמצע הקו שבין זווית הלסת ל-CV-24, וקרסול (CA-15) וכף רגל (CA-16) סמוך ל-CV-24 בצד הסנטר.",
         relatedPoints: ["CA-14", "CA-15", "CA-16"]
       }
     ];
 
-    // ==================== DATASET 2: THE 16 CHEEK ACUPUNCTURE POINTS (1:1 PIXEL CALIBRATED TO 68010.JPG) ====================
+    // ==================== DATASET 2: THE 16 CHEEK ACUPUNCTURE POINTS (x/y are computed below from Table 1 — see caGeometry) ====================
     const cheekPoints = [
       {
         code: "CA-1",
@@ -1004,11 +1013,9 @@
         color: "#7e22ce",
         strokeColor: "#d8b4fe",
         isLarge: true,
-        x: 554.2,
-        y: 328.4,
-        callout: { type: "left", lineEndX: 280, textX: 272, textY: 332 },
-        location: "אזור הרקה (Temple): בקו אופקי עם העין (y=328), כ-1 צון מעל אמצע הגבול העליון של קשת הזיגומה, על בטן שריר הרקה (Temporalis).",
-        palpation: "מתח קו אופקי מגובה העין אחורה אל שקע הרקה, ובקש מהמטופל להדק שיניים כדי לחוש את התכווצות שריר הרקה מתחת לאצבע.",
+        callout: { type: "left", lineEndX: 280, textX: 272 },
+        location: "צון אחד מעל אמצע הגבול העליון של קשת הזיגומה – באזור הרקה, על שריר הרקה (Temporalis).",
+        palpation: "אתר את קשת הזיגומה (בין זווית העין החיצונית לטרגוס) וסמן את אמצע הגבול העליון שלה; עלה משם צון אחד (רוחב אגודל המטופל) כלפי מעלה. בהידוק שיניים מורגש שריר הרקה מתחת לאצבע.",
         needle: "0.16×13 מ״מ | עומק 2–4 מ״מ לפאשיה של שריר הרקה",
         sideTime: "דו-צדדי או בצד הכאב | 30 דקות",
         indications: "כאבי ראש, מיגרנות, סחרחורת צווארית, נדודי שינה, חרדה, הרגעת ה-Shen ואיזון ציר היפותלמוס-היפופיזה-שחלות (HPO) בטיפולי פריון.",
@@ -1024,11 +1031,9 @@
         color: "#facc15",
         strokeColor: "#fef08a",
         isLarge: true,
-        x: 540.7,
-        y: 430.6,
-        callout: { type: "left", lineEndX: 268, textX: 260, textY: 434 },
-        location: "הנקודה הצהובה העליונה: בשקע שמתחת לקשת הזיגומה, במפגש השפה האחורית של הזיז הוויי (Coronoid Process) עם הגבול הקדמי-עליון של שריר המלעס (Masseter), בקו אופקי אחד עם נקודת המרפק (CA-10) ונקודת הגב העליון (CA-6).",
-        palpation: "בקש מהמטופל לפתוח ולסגור את הפה: תרגיש את הזיז הוויי נע קדימה ואחורה מתחת לעצם הלחי. הנקודה יושבת בשקע שבין הזיז הוויי לגבול הקדמי של המלעס.",
+        callout: { type: "left", lineEndX: 268, textX: 260 },
+        location: "במפגש השפה האחורית של הזיז הקורונואידי (Coronoid Process) של הלסת התחתונה עם הגבול התחתון של קשת הזיגומה.",
+        palpation: "הנח אצבע צמוד מתחת לגבול התחתון של קשת הזיגומה ובקש מהמטופל לפתוח ולסגור את הפה: הזיז הקורונואידי נע מתחת לקשת. הנקודה בשפה האחורית שלו, צמוד לקשת (קדמית לשקע שמעל חריץ הלסת).",
         needle: "0.16–0.18 מ״מ | עומק 3–5 מ״מ אנכית לעור",
         sideTime: "דו-צדדי (בוויסות מערכתי) | 30–45 דקות",
         indications: "מועקה בחזה, פלפיטציות, חרדה, קוצר נשימה, כאבים בבית החזה, וויסות ציר הלב-רחם (Bao Mai) להורדת סטרס בטיפולי פריון.",
@@ -1044,11 +1049,9 @@
         color: "#facc15",
         strokeColor: "#fef08a",
         isLarge: true,
-        x: 533.8,
-        y: 481.0,
-        callout: { type: "left", lineEndX: 268, textX: 260, textY: 485 },
-        location: "הנקודה הצהובה האמצעית: באמצע הקו המחבר בין CA-2 ל-CA-4 לאורך הגבול הקדמי של שריר המלעס (Masseter), בקו אופקי אחד עם בסיס הנחיר ונקודת שורש כף היד (CA-11).",
-        palpation: "בקש מהמטופל להדק שיניים, אתר את 'המדרגה' הקדמית של שריר המלעס באמצע הלחי (בגובה בסיס הנחיר), ודקור בחריץ שבינו לבין השריר המחצצר הרך.",
+        callout: { type: "left", lineEndX: 268, textX: 260 },
+        location: "באמצע הקו המחבר בין נקודת המחמם העליון (CA-2) לנקודת המחמם התחתון (CA-4).",
+        palpation: "סמן את CA-2 ואת CA-4 ומצא את אמצע הקו ביניהן; בהידוק שיניים הנקודה נמצאת על החלק הקדמי של שריר המלעס.",
         needle: "0.16–0.18 מ״מ | עומק 3–5 מ״מ אנכית",
         sideTime: "דו-צדדי או לפי אבחנת בטן | 30–45 דקות",
         indications: "הפרעות עיכול, כאבי קיבה, נפיחות בטנית, רפלוקס, בחילות, תקיעות צ׳י הכבד ותסמונת קדם-וסתית (PMS) המלווה כאבי מחזור.",
@@ -1064,11 +1067,9 @@
         color: "#facc15",
         strokeColor: "#fef08a",
         isLarge: true,
-        x: 526.9,
-        y: 535.9,
-        callout: { type: "left", lineEndX: 268, textX: 260, textY: 540 },
-        location: "הנקודה הצהובה התחתונה: בחלק התחתון של הגבול הקדמי של שריר המלעס (Masseter), בקו אופקי עם קו השפתיים/זווית הפה, וקדמית-עליונה מעט לנקודת הירך הכחולה (CA-13).",
-        palpation: "בקש מהמטופל להדק שיניים, עקוב אחרי הגבול הקדמי של שריר המלעס למטה עד לגובה זווית הפה (מעל גבול הלסת התחתונה).",
+        callout: { type: "left", lineEndX: 268, textX: 260 },
+        location: "על הקו האלכסוני הקדמי של הלסת התחתונה (External Oblique Line) – במקום שבו השפה הקדמית של ענף הלסת (Ramus) עוברת לגוף הלסת.",
+        palpation: "עקוב באצבע אחרי השפה הקדמית של ענף הלסת, מתחת לזיז הקורונואידי, כלפי מטה – עד שהיא מתעקלת קדימה אל הקו האלכסוני של גוף הלסת (בערך בגובה זווית הפה).",
         needle: "0.16–0.18 מ״מ | עומק 3–5 מ״מ (זהירות מעורק הפנים הצמוד)",
         sideTime: "בצד הרגיש בבטן התחתונה או דו-צדדי | 30–45 דקות",
         indications: "נקודת המאסטר לגינקולוגיה ופריון: כאבי מחזור (דיסמנוריאה), כאב שחלתי, ויסות רחם ושחלות, אנדומטריוזיס, שיפור זרימת דם לאגן וחיזוק הכליות.",
@@ -1084,11 +1085,9 @@
         color: "#ef4444",
         strokeColor: "#fecaca",
         isLarge: false,
-        x: 619.0,
-        y: 361.5,
-        callout: { type: "right", lineEndX: 812, textX: 820, textY: 365 },
-        location: "הנקודה האדומה העליונה: קדמית לחיבור העליון של אפרכסת האוזן (Helix Root), מעל שורש קשת הזיגומה ומפרק הלסת.",
-        palpation: "משש צמוד לקצה העליון-קדמי של האוזן מעל שורש עצם הלחי.",
+        callout: { type: "right", lineEndX: 812, textX: 820 },
+        location: "בקצה העליון של שורש קשת הזיגומה – צמוד לפני האוזן, מעל מפרק הלסת.",
+        palpation: "החלק אצבע לאורך קשת הזיגומה אחורה עד שורשה, צמוד לפני האוזן ומעל מפרק הלסת, ועלה אל הקצה העליון של השורש.",
         needle: "0.16×13 מ״מ | עומק 2–3 מ״מ בהטיה שטחית על הפאשיה",
         sideTime: "בצד הכאב (איפסילטרלי) או דו-צדדי | 30 דקות",
         indications: "נקודת המאסטר לכל פתולוגיות הצוואר: צוואר תפוס חריף, בלט/פריצת דיסק צווארית, רדיקולופתיה צווארית ונוקשות בשרירי הצוואר.",
@@ -1104,11 +1103,9 @@
         color: "#ef4444",
         strokeColor: "#fecaca",
         isLarge: false,
-        x: 612.5,
-        y: 422.9,
-        callout: { type: "right", lineEndX: 812, textX: 820, textY: 427 },
-        location: "הנקודה האדומה השנייה: ממש קדמית לטרגוס של האוזן (אזור SI19), בשקע מפרק הלסת (TMJ) מתחת לשורש קשת הזיגומה.",
-        palpation: "בקש מהמטופל לפתוח מעט את הפה – ייווצר שקע ברור מתחת לראש מפרק הלסת וקדמית לטרגוס של האוזן.",
+        callout: { type: "right", lineEndX: 812, textX: 820 },
+        location: "במפגש הגבול התחתון של קשת הזיגומה (שורש הקשת) עם הקופסית התחתונה של מפרק הלסת (TMJ) – קדמית לטרגוס.",
+        palpation: "בקש מהמטופל לפתוח ולסגור את הפה: ראש הלסת (Condyle) נע מתחת לאצבע קדמית לטרגוס. הנקודה בקצה התחתון של המפרק, מתחת לשורש הקשת.",
         needle: "0.16–0.18 מ״מ | עומק 3–4 מ״מ אנכית",
         sideTime: "בצד הכאב (נדקרת בצמד עם CA-5) | 30 דקות",
         indications: "כאבי גב עליון ושכמות, שריר הטרפז והמעוינים, נוקשות במעבר צוואר-גב (C7–T1).",
@@ -1124,11 +1121,9 @@
         color: "#ef4444",
         strokeColor: "#fecaca",
         isLarge: false,
-        x: 608.3,
-        y: 496.4,
-        callout: { type: "right", lineEndX: 812, textX: 820, textY: 500 },
-        location: "הנקודה האדומה השלישית: קדמית-תחתונה לתנוך האוזן, באמצע הקו שבין CA-6 ל-CA-8 לאורך השפה האחורית של ענף הלסת (Ramus) ושריר המלעס.",
-        palpation: "החלק אצבע מתחת לתנוך האוזן לאורך השפה האחורית של עצם הלסת ושריר המלעס – הנקודה נמצאת מיד מתחת לגובה התנוך.",
+        callout: { type: "right", lineEndX: 812, textX: 820 },
+        location: "באמצע הקו המחבר בין נקודת הגב (CA-6) לנקודת העצה (CA-8).",
+        palpation: "סמן את CA-6 ואת CA-8 ומצא את אמצע הקו ביניהן – בערך בגובה תחתית תנוך האוזן, קדמית לשפה האחורית של ענף הלסת.",
         needle: "0.16–0.18 מ״מ | עומק 3–4 מ״מ לתוך הפאשיה של שריר המלעס האחורי",
         sideTime: "בצד הכאב או דו-צדדי | 30 דקות",
         indications: "כאבי גב תחתון חריפים וכרוניים, נקע מותני, בלט דיסק מותני (L1–L5) וכאבי גב תחתון בזמן הווסת.",
@@ -1144,11 +1139,9 @@
         color: "#ef4444",
         strokeColor: "#fecaca",
         isLarge: false,
-        x: 584.9,
-        y: 559.9,
-        callout: { type: "right", lineEndX: 812, textX: 820, textY: 564 },
-        location: "הנקודה האדומה התחתונה: באזור זווית הלסת התחתונה (Mandibular Angle), על אחיזת הגיד התחתון-אחורי של שריר המלעס, אחורית ותחתונה לנקודת הירך (CA-13).",
-        palpation: "משש את הזווית הגרמית האחורית-תחתונה של הלסת התחתונה על גבי סיבי האחיזה של שריר המלעס.",
+        callout: { type: "right", lineEndX: 812, textX: 820 },
+        location: "חצי צון קדמית ומעל לזווית הלסת התחתונה (Mandibular Angle).",
+        palpation: "מצא את זווית הלסת התחתונה ועלה ממנה חצי צון באלכסון קדימה ולמעלה (לכיוון הפה).",
         needle: "0.16–0.18 מ״מ | עומק 3–4 מ״מ",
         sideTime: "דו-צדדי או בצד הכאב | 30–45 דקות",
         indications: "כאבי סקרום ועצם הזנב, אישיאס, נקודת מפתח בכאבי מחזור (מקלעת העצבים הסקראלית) ושיפור זרימת הדם לרחם בפריון.",
@@ -1164,11 +1157,9 @@
         color: "#22c55e",
         strokeColor: "#bbf7d0",
         isLarge: false,
-        x: 513.4,
-        y: 402.9,
-        callout: { type: "top", lineEndY: 64, textX: 513.4, textY: 54 },
-        location: "הנקודה הירוקה העליונה: במרכז קשת הזיגומה (על התפר הטמפורו-זיגומטי), קדמית ומעט מעל לנקודת המחמם העליון (CA-2).",
-        palpation: "העבר אצבע לאורך מרכז קשת עצם הלחי עד שתרגיש שקע/חריץ זעיר במרכז הקשת, מעט קדמית ומעל ל-CA-2.",
+        callout: { type: "top", lineEndY: 64, textY: 54 },
+        location: "באמצע התפר הרקתי-זיגומטי (Temporozygomatic Suture) שעל קשת הזיגומה.",
+        palpation: "החלק אצבע מגוף עצם הלחי אחורה לאורך קשת הזיגומה: התפר נמצא בשליש הקדמי של הקשת (קדמית ומעט מעל ל-CA-2). הנקודה באמצע גובה הקשת.",
         needle: "0.16×13 מ״מ | עומק 2–3 מ״מ שטחי מעל העצם",
         sideTime: "בצד הכתף הכואבת | 30 דקות",
         indications: "כתף קפואה (Frozen Shoulder), דלקות בגידי הכתף (Rotator Cuff), וכאבי צוואר המקרינים לכתף.",
@@ -1184,11 +1175,9 @@
         color: "#22c55e",
         strokeColor: "#bbf7d0",
         isLarge: false,
-        x: 442.8,
-        y: 428.2,
-        callout: { type: "top", lineEndY: 94, textX: 442.8, textY: 84 },
-        location: "הנקודה הירוקה השנייה: על גוף עצם הלחי (Zygomatic Bone) ממש מתחת לזווית החיצונית של העין, ובקו אופקי אחד עם נקודת המחמם העליון (CA-2).",
-        palpation: "רד אנכית מהזווית החיצונית של העין אל הגבול התחתון של גוף עצם הלחי (מוצא שרירי הזיגומה).",
+        callout: { type: "top", lineEndY: 94, textY: 84 },
+        location: "באמצע הקו המחבר בין זווית העין החיצונית (Lateral Canthus) לנקודה הנמוכה ביותר של עצם הלחי (Zygomatic Bone).",
+        palpation: "מצא את הנקודה הנמוכה ביותר של עצם הלחי (מתחת לבליטת הלחי) ומתח קו אל זווית העין החיצונית; הנקודה באמצע הקו, על עצם הלחי.",
         needle: "0.16×13 מ״מ | עומק 2–3 מ״מ שטחי",
         sideTime: "בצד הכאב | 30 דקות",
         indications: "מרפק טניס (Lateral Epicondylitis), מרפק גולף, כאבים באמה.",
@@ -1204,11 +1193,9 @@
         color: "#22c55e",
         strokeColor: "#bbf7d0",
         isLarge: false,
-        x: 385.8,
-        y: 478.7,
-        callout: { type: "top", lineEndY: 124, textX: 385.8, textY: 114 },
-        location: "הנקודה הירוקה השלישית: במפגש קו אופקי מבסיס הנחיר עם קפל החיוך (Nasolabial Groove), ובקו אופקי אחד עם נקודת המחמם האמצעי (CA-3).",
-        palpation: "צא בקו אופקי מבסיס הנחיר אל תוך החריץ השרירי של קפל החיוך.",
+        callout: { type: "top", lineEndY: 124, textY: 114 },
+        location: "בקפל האף-שפה (Nasolabial Fold), בגובה הקו האופקי של הקצה התחתון של הנחיר.",
+        palpation: "צא בקו אופקי מהקצה התחתון של הנחיר (כנף האף) הצידה, עד החריץ של קפל האף-שפה.",
         needle: "0.16×13 מ״מ | עומק 2–3 מ״מ בהחדרה מהירה",
         sideTime: "בצד הכאב | 30 דקות",
         indications: "תסמונת התעלה הקרפלית, דלקות גידים ונקעים בשורש כף היד.",
@@ -1224,11 +1211,9 @@
         color: "#22c55e",
         strokeColor: "#bbf7d0",
         isLarge: false,
-        x: 352.9,
-        y: 507.1,
-        callout: { type: "top", lineEndY: 154, textX: 352.9, textY: 144 },
-        location: "הנקודה הירוקה התחתונה: בין תחתית הנחיר לשפה העליונה (צידי לפילטרום), על סיבי שריר חוג הפה העליון (Orbicularis Oris).",
-        palpation: "בחצי הגובה שבין פתח הנחיר לשפה העליונה.",
+        callout: { type: "top", lineEndY: 154, textY: 144 },
+        location: "באמצע הקו המחבר בין אמצע הקצה התחתון של הנחיר לבין הגבול האדום (Vermilion Border) של השפה העליונה.",
+        palpation: "מתחת לאמצע הנחיר: בחצי הגובה שבין הקצה התחתון של הנחיר לגבול האדום של השפה העליונה.",
         needle: "0.16×13 מ״מ | עומק 1.5–2 מ״מ שטחי מאוד",
         sideTime: "בצד הכאב | 20–30 דקות",
         indications: "כאב, נימול או אצבע הדק (Trigger Finger) בכף היד ובאצבעות.",
@@ -1244,11 +1229,9 @@
         color: "#0ea5e9",
         strokeColor: "#bae6fd",
         isLarge: false,
-        x: 562.3,
-        y: 548.8,
-        callout: { type: "bottom", lineEndY: 745, textX: 562.3, textY: 765 },
-        location: "הנקודה הכחולה האחורית ביותר: על בליטת שריר המלעס (Masseteric Prominence), ממוקמת בדיוק בין נקודת המחמם התחתון הצהובה (CA-4) לבין נקודת הסקרום האדומה (CA-8).",
-        palpation: "בקש מהמטופל להדק שיניים חזק – הנקודה נמצאת על בטן שריר המלעס התחתונה, באמצע הדרך בין CA-4 (בגבול הקדמי) ל-CA-8 (בגבול האחורי).",
+        callout: { type: "bottom", lineEndY: 782, textY: 802 },
+        location: "צון אחד קדמית ומעל לזווית הלסת התחתונה, על בליטת שריר המלעס (Masseteric Tuberosity).",
+        palpation: "מצא את זווית הלסת התחתונה ועלה ממנה צון אחד באלכסון קדימה ולמעלה; בהידוק שיניים הנקודה יושבת על בליטת שריר המלעס.",
         needle: "0.16–0.18 מ״מ | עומק 3–5 מ״מ לתוך הפאשיה של שריר המלעס",
         sideTime: "בצד הכאב | 30 דקות",
         indications: "כאבי מפרק הירך, בורסיטיס טרוכנטרית, אישיאס המקרין לישבן ולירך.",
@@ -1264,11 +1247,9 @@
         color: "#0ea5e9",
         strokeColor: "#bae6fd",
         isLarge: false,
-        x: 473.7,
-        y: 614.2,
-        callout: { type: "bottom", lineEndY: 745, textX: 473.7, textY: 765 },
-        location: "הנקודה הכחולה האמצעית: על הגבול התחתון של גוף הלסת התחתונה (Mandibular Body), באמצע הקו שבין נקודת הירך (CA-13) לנקודת הקרסול (CA-15).",
-        palpation: "משש לאורך העצם התחתונה של הלסת קדמית לשריר המלעס ובאמצע הדרך לכיוון הסנטר.",
+        callout: { type: "bottom", lineEndY: 745, textY: 765 },
+        location: "באמצע הקו המחבר בין זווית הלסת התחתונה לנקודת צ'נג-ג'יאנג (承浆 CV-24 – השקע במרכז החריץ שבין השפה התחתונה לסנטר).",
+        palpation: "סמן את זווית הלסת ואת CV-24 (השקע במרכז החריץ שמתחת לשפה התחתונה), ומצא את אמצע הקו ביניהן על פני גוף הלסת.",
         needle: "0.16–0.18 מ״מ | עומק 2–4 מ״מ",
         sideTime: "בצד הברך הכואבת | 30 דקות",
         indications: "שחיקת סחוס בברך (אוסטיאוארתריטיס), פציעות מניסקוס ורצועות, כאבי ברכיים במדרגות.",
@@ -1284,11 +1265,9 @@
         color: "#0ea5e9",
         strokeColor: "#bae6fd",
         isLarge: false,
-        x: 379.7,
-        y: 634.5,
-        callout: { type: "bottom", lineEndY: 782, textX: 379.7, textY: 802 },
-        location: "הנקודה הכחולה התחתונה בסנטר: בצד התחתון של הסנטר, מעט אחורית ותחתונה לנקודת כף הרגל (CA-16), בבסיס שריר מוריד השפה התחתונה.",
-        palpation: "בחלק הקדמי-תחתון של הלסת התחתונה בצידי הסנטר, מעט מתחת ומאחורי CA-16.",
+        callout: { type: "bottom", lineEndY: 782, textY: 802 },
+        location: "על הקו המחבר בין נקודת הברך (CA-14) לנקודת צ'נג-ג'יאנג (CV-24), בשליש הקרוב ל-CV-24 (לקו האמצע).",
+        palpation: "חלק את הקו שבין CV-24 ל-CA-14 לשלושה חלקים שווים; הנקודה בסוף השליש הראשון מ-CV-24 – בערך מתחת לזווית הפה.",
         needle: "0.16×13 מ״מ | עומק 2–3 מ״מ",
         sideTime: "בצד הקרסול הכואב | 30 דקות",
         indications: "נקע חריף או כרוני בקרסול, דלקת בגיד אכילס, נפיחות בקרסול.",
@@ -1304,17 +1283,140 @@
         color: "#0ea5e9",
         strokeColor: "#bae6fd",
         isLarge: false,
-        x: 360.6,
-        y: 620.3,
-        callout: { type: "bottom", lineEndY: 745, textX: 325, textY: 765 },
-        location: "הנקודה הכחולה הקדמית ביותר בסנטר: בצד הסנטר (כ-0.5 צון הצידה ממרכז הסנטר), מעט קדמית וגבוהה יותר מנקודת הקרסול (CA-15), על שריר הסנטר (Mentalis).",
-        palpation: "אתר את בליטת הסנטר מתחת לשפה התחתונה וזוז חצי רוחב אגודל הצידה (קדמית ומעל ל-CA-15).",
+        callout: { type: "bottom", lineEndY: 745, textY: 765, textX: 318 },
+        location: "חצי צון לצד נקודת צ'נג-ג'יאנג (承浆 CV-24).",
+        palpation: "מ-CV-24 (השקע במרכז החריץ שמתחת לשפה התחתונה) זוז חצי צון הצידה.",
         needle: "0.16×13 מ״מ | עומק 2–3 מ״מ",
         sideTime: "בצד הכואב | 30 דקות",
         indications: "דורבן בעקב (Plantar Fasciitis), כאבים בכריות כף הרגל או נימול בבהונות.",
         protocols: []
       }
     ];
+
+
+    // ==================== GEOMETRY: POINT POSITIONS DERIVED FROM TABLE 1 (Wang & Wu, "Cheek Acupuncture") ====================
+    // Bony and soft-tissue landmarks traced on the 3D head model (SVG viewBox 1000×828, same pixels as the image).
+    // Every point is then built from its Table 1 definition, so moving a landmark moves the points that depend on it.
+    const CUN = 52; // 1 cun (patient's thumb width) ≈ 2 cm ≈ 52 px on this model (ear length ≈ 158 px ≈ 6.3 cm)
+    const caLandmarks = {
+      archTopMid:      { x: 551, y: 391, label: "אמצע הגבול העליון של קשת הזיגומה" },
+      archRootTop:     { x: 621, y: 390, label: "קצה עליון של שורש הקשת" },
+      coronoidArch:    { x: 547, y: 421, label: "שפה אחורית של הזיז הקורונואידי × גבול תחתון של הקשת" },
+      obliqueLine:     { x: 530, y: 541, label: "הקו האלכסוני הקדמי של הלסת" },
+      tmjInferior:     { x: 614, y: 438, label: "קופסית תחתונה של מפרק הלסת" },
+      sutureMid:       { x: 519, y: 404, label: "אמצע התפר הרקתי-זיגומטי" },
+      lateralCanthus:  { x: 436, y: 356, label: "זווית העין החיצונית" },
+      zygomaLowest:    { x: 456, y: 444, label: "הנקודה הנמוכה של עצם הלחי" },
+      nostrilMid:      { x: 348, y: 481, label: "אמצע הקצה התחתון של הנחיר" },
+      nasolabialFold:  { x: 375, y: 481, label: "קפל האף-שפה" },
+      vermilion:       { x: 348, y: 523, label: "גבול השפה העליונה" },
+      mandibleAngle:   { x: 604, y: 568, label: "זווית הלסת" },
+      chengjiang:      { x: 344, y: 590, label: "承浆 CV-24" }
+    };
+    // Direction "anterior & superior" from the angle of the mandible = bisector of the posterior border of the ramus and the inferior border of the body.
+    const ANGLE_BISECTOR = { x: -0.8, y: -0.6 };
+
+    const gMid = (a, b) => ({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 });
+    const gLerp = (a, b, t) => ({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t });
+    const gAlong = (a, dir, d) => ({ x: a.x + dir.x * d, y: a.y + dir.y * d });
+
+    const caGeometry = (() => {
+      const L = caLandmarks;
+      const g = {};
+      g["CA-1"] = { x: L.archTopMid.x, y: L.archTopMid.y - CUN };            // 1 cun above the upper edge of the middle of the zygomatic arch
+      g["CA-2"] = { ...L.coronoidArch };                                     // posterior coronoid × lower edge of the zygomatic arch
+      g["CA-4"] = { ...L.obliqueLine };                                      // anterior oblique line of the mandible
+      g["CA-3"] = gMid(g["CA-2"], g["CA-4"]);                               // midpoint CA-2 — CA-4
+      g["CA-5"] = { ...L.archRootTop };                                      // top edge of the root of the zygomatic arch
+      g["CA-6"] = { ...L.tmjInferior };                                      // lower edge of the arch × inferior capsule of the TMJ
+      g["CA-8"] = gAlong(L.mandibleAngle, ANGLE_BISECTOR, CUN / 2);          // 0.5 cun anterior & superior to the angle of the mandible
+      g["CA-7"] = gMid(g["CA-6"], g["CA-8"]);                               // midpoint CA-6 — CA-8
+      g["CA-9"] = { ...L.sutureMid };                                        // middle of the temporozygomatic suture
+      g["CA-10"] = gMid(L.lateralCanthus, L.zygomaLowest);                  // midpoint lateral canthus — bottom of the zygomatic bone
+      g["CA-11"] = { ...L.nasolabialFold };                                  // nasolabial fold at the level of the lower edge of the nostril
+      g["CA-12"] = gMid(L.nostrilMid, L.vermilion);                         // midpoint nostril lower edge — vermilion border
+      g["CA-13"] = gAlong(L.mandibleAngle, ANGLE_BISECTOR, CUN);             // 1 cun anterior & superior to the angle, on the masseteric tuberosity
+      g["CA-14"] = gMid(L.mandibleAngle, L.chengjiang);                     // midpoint angle of the mandible — CV-24
+      g["CA-15"] = gLerp(L.chengjiang, g["CA-14"], 1 / 3);                  // on CA-14 — CV-24, in the third next to CV-24 (midline)
+      g["CA-16"] = { x: L.chengjiang.x + 12, y: L.chengjiang.y };           // 0.5 cun lateral to CV-24 (in a side view, lateral shows mostly as depth)
+      Object.keys(g).forEach((k) => { g[k] = { x: Math.round(g[k].x * 10) / 10, y: Math.round(g[k].y * 10) / 10 }; });
+      return g;
+    })();
+    cheekPoints.forEach((pt) => Object.assign(pt, caGeometry[pt.code]));
+
+    const SVG_NS = "http://www.w3.org/2000/svg";
+    function svgEl(tag, attrs, text) {
+      const el = document.createElementNS(SVG_NS, tag);
+      Object.entries(attrs).forEach(([k, v]) => el.setAttribute(k, v));
+      if (text) el.textContent = text;
+      return el;
+    }
+    const ptXY = (code) => caGeometry[code];
+
+    function renderTracks() {
+      const host = document.getElementById("tracksGroup");
+      if (!host) return;
+      host.innerHTML = "";
+      [
+        { codes: ["CA-5", "CA-6", "CA-7", "CA-8"], color: "#ef4444", dash: "4,4", w: 2 },
+        { codes: ["CA-2", "CA-3", "CA-4"], color: "#facc15", dash: "5,3", w: 2.2 },
+        { codes: ["CA-9", "CA-10", "CA-11", "CA-12"], color: "#22c55e", dash: "4,3", w: 2 },
+        { codes: ["CA-13", "CA-14", "CA-15", "CA-16"], color: "#0ea5e9", dash: "4,3", w: 2 }
+      ].forEach((t) => {
+        host.appendChild(svgEl("polyline", {
+          points: t.codes.map((c) => `${ptXY(c).x},${ptXY(c).y}`).join(" "),
+          fill: "none", stroke: t.color, "stroke-width": t.w, "stroke-dasharray": t.dash, opacity: "0.78"
+        }));
+      });
+    }
+
+    // Construction guides: the landmarks and helper lines of Table 1, so each point can be checked against its definition.
+    function renderGuides() {
+      const host = document.getElementById("guidesLayer");
+      if (!host) return;
+      host.innerHTML = "";
+      const L = caLandmarks;
+      const line = (a, b, color, dash = "3,3") => host.appendChild(svgEl("line", {
+        x1: a.x, y1: a.y, x2: b.x, y2: b.y, stroke: color, "stroke-width": "1.6", "stroke-dasharray": dash, opacity: "0.95"
+      }));
+      // anchor is given in screen terms ("end" = text ends at x, to its left); the page is RTL, so start/end are swapped for SVG.
+      const rtlAnchor = { start: "end", end: "start", middle: "middle" };
+      const label = (p, text, dx, dy, anchor = "middle") => host.appendChild(svgEl("text", {
+        x: p.x + dx, y: p.y + dy, "text-anchor": rtlAnchor[anchor], direction: "rtl", "font-size": "9.5", "font-weight": "700",
+        fill: "#ffffff", stroke: "#0f172a", "stroke-width": "2.6", "paint-order": "stroke", class: "guide-label"
+      }, text));
+      const mark = (p) => {
+        host.appendChild(svgEl("line", { x1: p.x - 5, y1: p.y, x2: p.x + 5, y2: p.y, stroke: "#ffffff", "stroke-width": "1.8" }));
+        host.appendChild(svgEl("line", { x1: p.x, y1: p.y - 5, x2: p.x, y2: p.y + 5, stroke: "#ffffff", "stroke-width": "1.8" }));
+      };
+      const ticks = (a, dir, n, step) => { for (let i = 1; i <= n; i++) mark(gAlong(a, dir, step * i)); };
+
+      // Zygomatic arch: upper edge and its midpoint → 1 cun up → CA-1
+      line({ x: 482, y: 391 }, { x: 624, y: 391 }, "#7dd3fc", "6,3");
+      line(L.archTopMid, ptXY("CA-1"), "#c084fc");
+      mark(L.archTopMid);
+      label(gMid(L.archTopMid, ptXY("CA-1")), "1 צון", 8, 3, "start");
+      // Lateral canthus → lowest point of the zygomatic bone, midpoint = CA-10
+      line(L.lateralCanthus, L.zygomaLowest, "#86efac");
+      mark(L.lateralCanthus); mark(L.zygomaLowest);
+      label(L.lateralCanthus, "זווית העין", -6, -8, "end");
+      label(L.zygomaLowest, "תחתית עצם הלחי", 4, 16, "middle");
+      // Lower edge of the nostril (horizontal) → nasolabial fold = CA-11; nostril → vermilion border, midpoint = CA-12
+      line({ x: 336, y: L.nostrilMid.y }, { x: 392, y: L.nostrilMid.y }, "#86efac");
+      line(L.nostrilMid, L.vermilion, "#86efac");
+      mark(L.vermilion);
+      label(L.vermilion, "גבול השפה", -4, 14, "end");
+      // Angle of the mandible → 0.5 cun (CA-8) → 1 cun (CA-13)
+      line(L.mandibleAngle, gAlong(L.mandibleAngle, ANGLE_BISECTOR, CUN), "#fca5a5");
+      mark(L.mandibleAngle);
+      label(L.mandibleAngle, "זווית הלסת", 6, 16, "start");
+      // Angle of the mandible → CV-24: midpoint = CA-14, first third from CV-24 = CA-15; CV-24 → 0.5 cun lateral = CA-16
+      line(L.mandibleAngle, L.chengjiang, "#7dd3fc");
+      ticks(L.chengjiang, { x: (ptXY("CA-14").x - L.chengjiang.x) / 3, y: (ptXY("CA-14").y - L.chengjiang.y) / 3 }, 2, 1);
+      mark(L.chengjiang);
+      label(L.chengjiang, "承浆 CV-24", -8, 16, "end");
+      // CA-3 and CA-7 are the midpoints of the yellow (CA-2 → CA-4) and red (CA-6 → CA-8) tracks.
+    }
 
 
     // ==================== DATASET 3: STUDY TABLE 1 (case report: standard points, indications, use in P1/P2) ====================
@@ -1330,10 +1432,10 @@
       "CA-9":  { loc: "אמצע התפר הטמפורו-זיגומטי.", ind: "כאב כתף, כתף קפואה, דלקת בגיד הדו-ראשי, סינוביטיס תת-אקרומיאלי, דלקת בגיד הסופרספינטוס וכו'.", use: ["P1"] },
       "CA-10": { loc: "אמצע הקו המחבר בין זווית העין החיצונית לתחתית עצם הלחי.", ind: "כאב מרפק, מרפק טניס, מרפק גולף, דלקת בגידי פושטי ומכופפי שורש כף היד וכו'.", use: [] },
       "CA-11": { loc: "בקפל האף-שפה (Nasolabial fold), בקו האופקי של הקצה התחתון של הנחיר.", ind: "כאב בשורש כף היד, פציעות במפרק, תסמונת התעלה הקרפלית, כאב באצבעות.", use: [] },
-      "CA-12": { loc: "אמצע הקו המחבר בין הקצה התחתון של הנחיר לגבול האדום של השפה העליונה.", ind: "דלקת פרקים באצבעות, דלקת בגידים, חוסר תחושה באצבעות או בכף היד.", use: [] },
+      "CA-12": { loc: "אמצע הקו המחבר בין אמצע הקצה התחתון של הנחיר לגבול האדום של השפה העליונה.", ind: "דלקת פרקים באצבעות, דלקת בגידים, חוסר תחושה באצבעות או בכף היד.", use: [] },
       "CA-13": { loc: "1 צון קדמית-עליונה לזווית הלסת התחתונה, על בליטת שריר המלעס.", ind: "אישיאס, דלקת מפרקים ניוונית בירך, פציעה בשריר הפיריפורמיס, כאב במפשעה.", use: ["P1", "P2"] },
       "CA-14": { loc: "אמצע הקו המחבר בין זווית הלסת התחתונה לנקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "כאב ברך, כאב לאורך העצב הפרונאלי, דלקת מפרקים, פציעה בשרירי ההמסטרינג, התכווצות שריר התאומים (Gastrocnemius) וכו'.", use: ["P1"] },
-      "CA-15": { loc: "בשליש הקרוב (לנקודת הברך) של הקו המחבר בין נקודת הברך (CA-14) לנקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "נקע בקרסול, נפיחות וכאב, דלקת מפרקים בקרסול, דלקת בגיד אכילס, כאב בעקב.", use: [] },
+      "CA-15": { loc: "על הקו המחבר בין נקודת הברך (CA-14) לנקודת צ'נג-ג'יאנג (承浆 CV24), בשליש הקרוב ל-CV24 (\"1/3 proximity\" – הקרוב לקו האמצע, כמו בספר).", ind: "נקע בקרסול, נפיחות וכאב, דלקת מפרקים בקרסול, דלקת בגיד אכילס, כאב בעקב.", use: [] },
       "CA-16": { loc: "0.5 צון לצד נקודת צ'נג-ג'יאנג (承浆 CV24).", ind: "גאוט (שיגדון), מתיחת הפאשיה הפלנטרית, דורבן, כאב בעקב, כאב בבוהן.", use: ["P1"] }
     };
 
@@ -1377,7 +1479,7 @@
       },
       dysmenorrhea: {
         title: "🌸 פרוטוקול קליני מלא: כאבי מחזור (דיסמנוריאה) וכאב שחלתי",
-        desc: "מבוסס על הנקודה הצהובה התחתונה בגבול הקדמי של המלעס (CA-4) והנקודות האדומות בגבול האחורי של המלעס (CA-8, CA-7) בשילוב אבחנת בטן.",
+        desc: "מבוסס על הנקודה הצהובה התחתונה על הקו האלכסוני הקדמי של הלסת (CA-4) והנקודות האדומות שלאורך השפה האחורית של ענף הלסת (CA-8, CA-7) בשילוב אבחנת בטן.",
         pointsList: "1. מחט ראשונה: CA-4 (מחמם תחתון - צהוב תחתון) | 2. מחט שנייה (להקרנה לאגן): CA-8 (סקרום - אדום תחתון) | 3. לכאב גב תחתון: CA-7 (מותן - אדום) | 4. לבחילות/נפיחות/PMS: CA-3 (מחמם אמצעי - צהוב אמצעי).",
         sideRule: "אם רק שחלה אחת כואבת/רגישה בבטן (למשל שמאל) – דוקרים בלחי שמאל בלבד! אם הכאב במרכז הרחם – דוקרים דו-צדדית.",
         verification: "אבחנת בטן: לוחצים על מוקד הכאב בבטן התחתונה לפני הדיקור, מחדירים את CA-4, ולוחצים שוב על הבטן – הרגישות צריכה לצנוח מיד.",
@@ -1388,7 +1490,7 @@
         desc: "טיפול מערכתי המשלב את הנקודה הסגולה ברקה (CA-1), שלוש הנקודות הצהובות של המחממים (CA-2, CA-3, CA-4) ונקודות האגן האדומות (CA-8, CA-7).",
         pointsList: "1. ליבת רבייה: CA-4 (מחמם תחתון - צהוב) + CA-8 (סקרום - אדום) | 2. ציר מוח-הורמונים והרגעת Shen: CA-1 (ראש - סגול) + CA-2 (מחמם עליון - צהוב) | 3. ויסות צ'י הכבד והעיכול: CA-3 (מחמם אמצעי - צהוב) + CA-7 (מותן - אדום).",
         sideRule: "בפריון נהוג לדקור דו-צדדית (בשתי הלחיים) לאיזון מערכתי מלא של ציר ההורמונים וזרימת הדם לאגן.",
-        verification: "מישוש השוואתי של מתח דופן הבטן סביב הטבור ובבטן התחתונה (CV4/CV6/ST29) לפני ואחרי החדרת מחטי הגבול הקדמי של המלעס.",
+        verification: "מישוש השוואתי של מתח דופן הבטן סביב הטבור ובבטן התחתונה (CV4/CV6/ST29) לפני ואחרי החדרת מחטי שלושת המחממים (CA-2..CA-4).",
         defaultPoint: "CA-4"
       }
     };
@@ -1482,7 +1584,7 @@
         const isSelected = pt.code === selectedPointCode;
         const opacity = isHighlighted || isSelected ? "1" : "0.28";
 
-        // 1. Render exact callout line and label matching 68010.jpg
+        // 1. Callout line and label
         const cg = document.createElementNS("http://www.w3.org/2000/svg", "g");
         cg.setAttribute("class", "callout-group");
         cg.setAttribute("opacity", opacity);
@@ -1494,7 +1596,8 @@
         const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
         line.setAttribute("x1", pt.x);
         line.setAttribute("y1", pt.y);
-        if (pt.callout.type === "left" || pt.callout.type === "right") {
+        const isSide = pt.callout.type === "left" || pt.callout.type === "right";
+        if (isSide) {
           line.setAttribute("x2", pt.callout.lineEndX);
           line.setAttribute("y2", pt.y);
         } else {
@@ -1507,7 +1610,7 @@
 
         const labelText = document.createElementNS("http://www.w3.org/2000/svg", "text");
         const heShort = pt.nameHe.split(" (")[0];
-        labelText.setAttribute("y", pt.callout.textY);
+        labelText.setAttribute("y", isSide ? pt.y + 4 : pt.callout.textY);
         labelText.setAttribute("font-size", isSelected ? "15" : "13.5");
         labelText.setAttribute("font-weight", isSelected ? "800" : "700");
         labelText.setAttribute("fill", isSelected ? "#fef08a" : "#0f172a");
@@ -1522,14 +1625,14 @@
           labelText.setAttribute("text-anchor", "start");
           labelText.textContent = `${pt.nameEn} • ${heShort}`;
         } else {
-          labelText.setAttribute("x", pt.callout.textX);
+          labelText.setAttribute("x", pt.callout.textX ?? pt.x);
           labelText.setAttribute("text-anchor", "middle");
           labelText.textContent = `${pt.nameEn} (${heShort})`;
         }
         cg.appendChild(labelText);
         calloutGroup.appendChild(cg);
 
-        // 2. Render interactive point dot on exact (x, y) of 68010.jpg
+        // 2. Interactive point dot at the computed (x, y)
         const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
         g.setAttribute("class", "point-node");
         g.setAttribute("opacity", opacity);
@@ -1700,6 +1803,7 @@
         allMusclesLayer: { id: "toggleMuscleBtn", label: "7 שרירי הלסת והלחי" },
         pointsLayer: { id: "togglePointsBtn", label: "16 נקודות הדיקור" },
         referenceLinesLayer: { id: "toggleGridBtn", label: "קווי חיווי ותוויות" },
+        guidesLayer: { id: "toggleGuidesBtn", label: "קווי בנייה לפי טבלה 1" },
         origRefLayer: { id: "toggleOrigRefBtn", label: "תמונת מקור להשוואה" }
       };
 
@@ -1712,6 +1816,8 @@
     }
 
     window.addEventListener("DOMContentLoaded", () => {
+      renderTracks();
+      renderGuides();
       updatePointInspectorText("CA-4");
       renderMusclesUI();
       setProtocol("all");
