@@ -473,13 +473,39 @@ function renderGuides() {
   // Angle of the mandible → 0.5 cun (CA-8) → 1 cun (CA-13)
   line(L.mandibleAngle, gAlong(L.mandibleAngle, ANGLE_BISECTOR, CUN), "#fca5a5");
   mark(L.mandibleAngle);
-  label(L.mandibleAngle, "זווית הלסת", 6, 16, "start");
+  label(L.mandibleAngle, "זווית הלסת", 6, 32, "start");
   // Angle of the mandible → CV-24: midpoint = CA-14, first third from CV-24 = CA-15; CV-24 → 0.5 cun lateral = CA-16
   line(L.mandibleAngle, L.chengjiang, "#7dd3fc");
   ticks(L.chengjiang, { x: (ptXY("CA-14").x - L.chengjiang.x) / 3, y: (ptXY("CA-14").y - L.chengjiang.y) / 3 }, 2, 1);
   mark(L.chengjiang);
   label(L.chengjiang, "承浆 CV-24", 0, 24, "middle");
   // CA-3 and CA-7 are the midpoints of the yellow (CA-2 → CA-4) and red (CA-6 → CA-8) tracks.
+}
+
+/* ---------- bony landmarks: lettered markers on the bones layer + legend under the map ---------- */
+function renderBoneLandmarks() {
+  const host = $id("boneLabels"), legend = $id("boneLegend");
+  if (typeof boneLandmarks === "undefined") return;
+  if (host) {
+    host.innerHTML = "";
+    boneLandmarks.forEach((b) => {
+      const g = svgEl("g", { class: "bone-mark", "data-bone": b.id });
+      const t = svgEl("title", {}, `${b.letter} · ${b.nameHe} (${b.nameEn})`);
+      g.appendChild(t);
+      g.appendChild(svgEl("circle", { cx: b.x, cy: b.y, r: 7.5, fill: "#e0f2fe", stroke: "#0369a1", "stroke-width": "1.6" }));
+      g.appendChild(svgEl("text", { x: b.x, y: b.y + 3.6, "text-anchor": "middle", "font-size": "10", "font-weight": "800", fill: "#0c4a6e", "font-family": "Heebo, sans-serif", "pointer-events": "none" }, b.letter));
+      host.appendChild(g);
+    });
+  }
+  if (legend) {
+    const ptChip = (code) => {
+      const pt = cheekPoints.find((p) => p.code === code);
+      return pt ? `<button type="button" class="bone-pt" data-code="${code}" aria-label="הצג ${code}">${codeBadge(pt)}</button>` : "";
+    };
+    legend.innerHTML = `<strong>ציוני דרך גרמיים (לפי איור 2-1-1 בספר, עמ' 14–16):</strong> האותיות על שכבת העצמות; לחיצה על קוד מציגה את הנקודה.
+      <ol class="bone-list">${boneLandmarks.map((b) => `<li><span class="bone-letter" aria-hidden="true">${b.letter}</span><span class="bone-txt"><b>${escHtml(b.nameHe)}</b> <span class="muted" lang="en">${escHtml(b.nameEn)}</span><br><span class="bone-note">${escHtml(b.note)}</span></span><span class="chips">${b.points.map(ptChip).join("")}</span></li>`).join("")}</ol>`;
+    legend.querySelectorAll(".bone-pt").forEach((btn) => btn.addEventListener("click", () => selectPoint(btn.dataset.code)));
+  }
 }
 
 /* ---------- zoom & pan ---------- */
@@ -616,6 +642,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   renderTracks();
   renderGuides();
+  renderBoneLandmarks();
   AtlasZoom.init();
   updatePointInspectorText("CA-4");
   renderMusclesUI();

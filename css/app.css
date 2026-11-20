@@ -514,6 +514,16 @@ button.callout:hover { filter: brightness(.98); border-color: #DDBA85; }
   .reveal { opacity: 1; transform: none; }
 }
 
+/* ---------- 25b. Bony landmarks legend ---------- */
+.bone-list { list-style: none; margin: .5rem 0 0; padding: 0; display: grid; gap: .45rem; grid-template-columns: 1fr; }
+@media (min-width: 700px) { .bone-list { grid-template-columns: 1fr 1fr; } }
+.bone-list li { display: grid; grid-template-columns: auto 1fr auto; gap: .5rem; align-items: start; padding: .4rem .5rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-2); }
+.bone-letter { display: inline-flex; align-items: center; justify-content: center; width: 1.45rem; height: 1.45rem; border-radius: 999px; background: #e0f2fe; border: 1.5px solid #0369a1; color: #0c4a6e; font-weight: 800; font-size: .8rem; }
+.bone-note { font-size: .76rem; color: var(--text-2); }
+.bone-pt { background: none; border: 0; padding: 0; cursor: pointer; }
+.bone-pt .code-badge { min-width: 2.7rem; font-size: .7rem; }
+.bone-mark { cursor: help; }
+
 /* ---------- 26. Section-specific helpers ---------- */
 .found-top { grid-template-columns: 1fr; }
 @media (min-width: 900px) { .found-top { grid-template-columns: 1.7fr 1fr; } }
