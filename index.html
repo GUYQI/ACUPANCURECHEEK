@@ -302,7 +302,12 @@
 
             <!-- TMJ capsule in front of the tragus (CA-6 lies below it) -->
             <ellipse cx="614" cy="427" rx="11" ry="8" fill="#0284c7" fill-opacity="0.38" stroke="#7dd3fc" stroke-width="1.6" />
-            <text x="588" y="409" fill="#bae6fd" font-size="9.5" font-weight="700" text-anchor="middle">קשת הזיגומה</text>
+            <!-- Zygomaticomaxillary suture (front edge of the zygomatic bone) -->
+            <path d="M 408,388 C 420,412 440,436 456,444" fill="none" stroke="#7dd3fc" stroke-width="2" />
+            <!-- Mental foramen (deep to CA-15 / CA-16) -->
+            <ellipse cx="393" cy="612" rx="5" ry="3.6" fill="#0284c7" fill-opacity="0.45" stroke="#7dd3fc" stroke-width="1.4" />
+            <!-- Lettered bony landmarks (drawn by js/atlas.js from boneLandmarks; legend under the map) -->
+            <g id="boneLabels"></g>
           </g>
 
           <!-- ==================== LAYER 3: THE 7 KEY MUSCLES (DRAWN OVER THE SAME LANDMARKS) ==================== -->
@@ -330,7 +335,7 @@
                        L 626,446
                        L 562,446 Z"
                     fill="#06b6d4" fill-opacity="0.26" stroke="#22d3ee" stroke-width="1.8" stroke-dasharray="4,2" />
-              <text x="578" y="441" fill="#cffafe" font-size="9" font-weight="700" text-anchor="middle">6. פטריגואיד</text>
+              <text x="566" y="445" fill="#cffafe" font-size="8.5" font-weight="700" text-anchor="middle">6. פטריגואיד</text>
             </g>
 
             <!-- 3. Buccinator: deep cheek wall in front of the ramus, between the jaws, toward the mouth corner -->
@@ -432,6 +437,7 @@
               <button type="button" class="layer-toggle" id="toggleGuidesBtn" data-layer="guidesLayer" aria-pressed="false"><span class="sw" aria-hidden="true"></span><span>קווי בנייה לפי הספר</span></button>
               <button type="button" class="layer-toggle" id="toggleOrigRefBtn" data-layer="origRefLayer" aria-pressed="false"><span class="sw" aria-hidden="true"></span><span>תמונת מקור להשוואה</span></button>
             </div>
+            <div class="viewer-note bone-legend" id="boneLegend" aria-label="ציוני דרך גרמיים"></div>
             <div class="viewer-note">
               <span class="badge" style="margin-inline-end:.4rem">מיקום לפי הספר, פרק 3 · 1 צון ≈ רוחב אגודל</span>
               <strong>מיקום לפי הספר (פרק 3, עמ' 39–46, וטבלה 1):</strong> כל נקודה מחושבת מסימני הייחוס הגרמיים שהספר מגדיר – קשת הלחי ושורשה, תהליך הקורונואיד, מפרק הלסת, הזווית הפנימית וזווית הלסת התחתונה, זווית העין, עצם הלחי, הנחיר, קו השפה העליונה וצ'נג-ג'יאנג (CV-24). למשל <span class="code">CA-3</span> באמצע בין <span class="code">CA-2</span> ל-<span class="code">CA-4</span>, <span class="code">CA-8</span> ו-<span class="code">CA-13</span> חצי צון וצון אחד מלפני ומעל לזווית הלסת, ו-<span class="code">CA-14</span> באמצע בין זווית הלסת ל-CV-24. הפעילו "קווי בנייה לפי הספר" כדי לראות את הסימנים והקווים. האיור הוא מודל להמחשה: על המטופל מודדים בצון שלו וממששים את העצמות.

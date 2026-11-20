@@ -425,6 +425,26 @@
     })();
     cheekPoints.forEach((pt) => Object.assign(pt, caGeometry[pt.code]));
 
+    // ==================== BONY LANDMARKS (book fig. 2-1-1, pp. 14–16, and the deep layers of chapter 3) ====================
+    // Lettered markers on the bones layer (letters, so they do not clash with the point numbers shown on phones).
+    const boneLandmarks = [
+      { id: "temporal", letter: "א", nameHe: "עצם הרקה", nameEn: "Temporal bone", x: 692, y: 318, points: ["CA-1", "CA-5", "CA-6"], note: "גומת הרקה היא השכבה העמוקה של הראש, הצוואר והגב." },
+      { id: "zygoma", letter: "ב", nameHe: "עצם הלחי", nameEn: "Zygomatic bone", x: 428, y: 422, points: ["CA-10"], note: "הנקודה הנמוכה ביותר שלה היא סימן הייחוס של המרפק; העצם עצמה עמוקה ל-CA-10." },
+      { id: "arch", letter: "ג", nameHe: "קשת הלחי", nameEn: "Zygomatic arch", x: 586, y: 404, points: ["CA-1", "CA-2", "CA-9"], note: "הראש – צון מעל אמצע הגבול העליון; המחמם העליון – בגבול התחתון; הכתף – על הקשת." },
+      { id: "archRoot", letter: "ד", nameHe: "שורש קשת הלחי", nameEn: "Root of the zygomatic arch", x: 601, y: 383, points: ["CA-5", "CA-6"], note: "הצוואר – בגבול העליון של השורש; הגב – מתחת לגבול התחתון שלו." },
+      { id: "tmj", letter: "ה", nameHe: "מפרק הלסת-רקה ותהליך הקונדיל", nameEn: "TMJ & condylar process", x: 633, y: 423, points: ["CA-6"], note: "הגב – מתחת למפרק, קדמית לטרגוס." },
+      { id: "suture", letter: "ו", nameHe: "התפר הרקתי-זיגומטי", nameEn: "Temporozygomatic suture", x: 534, y: 385, points: ["CA-9"], note: "הכתף – בנקודת האמצע של התפר." },
+      { id: "coronoid", letter: "ז", nameHe: "תהליך הקורונואיד", nameEn: "Coronoid process", x: 533, y: 450, points: ["CA-2"], note: "המחמם העליון – מאחורי התהליך, במפגש עם הגבול התחתון של קשת הלחי." },
+      { id: "notch", letter: "ח", nameHe: "החריץ הסיגמואידי", nameEn: "Mandibular (sigmoid) notch", x: 589, y: 428, points: ["CA-2", "CA-3"], note: "הגבול העליון של החריץ עמוק למחמם העליון והאמצעי." },
+      { id: "zygomaxSuture", letter: "ט", nameHe: "תפר הלחי-לסת עליונה", nameEn: "Zygomaticomaxillary suture", x: 416, y: 400, points: ["CA-10"], note: "תוחם את עצם הלחי מלפנים; הקצה התחתון שלו קרוב לנקודה הנמוכה של עצם הלחי." },
+      { id: "maxilla", letter: "י", nameHe: "הלסת העליונה", nameEn: "Maxilla", x: 396, y: 450, points: ["CA-11", "CA-12"], note: "שורש כף היד – מעל החלק האמצעי של גוף הלסת העליונה; היד – מעל שורשי השיניים העליונות." },
+      { id: "ramus", letter: "כ", nameHe: "ענף הלסת התחתונה", nameEn: "Mandibular ramus", x: 574, y: 509, points: ["CA-4", "CA-7", "CA-8"], note: "החלק האמצעי שלו עמוק למחמם התחתון; המותן והעצה סמוכים לשוליים האחוריים של הלסת." },
+      { id: "innerAngle", letter: "ל", nameHe: "הזווית הפנימית של הלסת התחתונה", nameEn: "Inner angle of the mandible (anterior border of the ramus → oblique line)", x: 505, y: 563, points: ["CA-4"], note: "המחמם התחתון – בשוליים הקדמיים שלה (בטבלה 1: על הקו האלכסוני הקדמי של הלסת)." },
+      { id: "angle", letter: "מ", nameHe: "זווית הלסת התחתונה", nameEn: "Angle of the mandible", x: 618, y: 580, points: ["CA-8", "CA-13", "CA-14"], note: "העצה – חצי צון מלפני ומעליה; הירך – צון אחד; הברך – באמצע הקו ממנה ל-CV-24." },
+      { id: "body", letter: "נ", nameHe: "גוף הלסת התחתונה", nameEn: "Body of the mandible", x: 502, y: 606, points: ["CA-14"], note: "השוליים התחתונים של חלקו האמצעי עמוקים לברך." },
+      { id: "mental", letter: "ס", nameHe: "הנקב הסנטרי", nameEn: "Mental foramen", x: 414, y: 610, points: ["CA-15", "CA-16"], note: "השוליים האחוריים של הנקב (ועצב הסנטר) עמוקים לקרסול ולכף הרגל." }
+    ];
+
     // ==================== DATASET 3: STUDY TABLE 1 (case report: standard points, indications, use in P1/P2) ====================
     const studyTable = {
       "CA-1":  { loc: "1 צון מעל אמצע הגבול העליון של קשת הזיגומה.", ind: "כאב ראש, סחרחורת, כאב שיניים, נדודי שינה, מתח, חרדה, דיכאון, שבץ וכו'.", use: ["P1"] },
