@@ -164,7 +164,8 @@ function renderPoints() {
 
   cheekPoints.forEach((pt) => {
     let isHighlighted = true;
-    if (currentMode === "muscles" && activeMuscle) isHighlighted = activeMuscle.relatedPoints.includes(pt.code);
+    if (boneFocusPoints) isHighlighted = boneFocusPoints.includes(pt.code);
+    else if (currentMode === "muscles" && activeMuscle) isHighlighted = activeMuscle.relatedPoints.includes(pt.code);
     else if (currentProtocol !== "all") isHighlighted = pt.protocols.includes(currentProtocol);
 
     const isSelected = pt.code === selectedPointCode;
@@ -482,18 +483,60 @@ function renderGuides() {
   // CA-3 and CA-7 are the midpoints of the yellow (CA-2 → CA-4) and red (CA-6 → CA-8) tracks.
 }
 
-/* ---------- bony landmarks: lettered markers on the bones layer + legend under the map ---------- */
+/* ---------- bony landmarks: lettered markers, legend, and "show this bone" focus ---------- */
+let boneFocusId = null;      // a landmark id or a group id
+let boneFocusPoints = null;  // codes kept lit while a bone is focused
+
+function drawBoneShape(host, b, single) {
+  const col = single ? "#38bdf8" : b.color;
+  if (b.shape.kind === "area") {
+    host.appendChild(svgEl("path", { d: b.shape.d, fill: col, "fill-opacity": single ? "0.5" : "0.55", stroke: single ? "#e0f2fe" : col, "stroke-width": "2.6" }));
+  } else {
+    host.appendChild(svgEl("path", { d: b.shape.d, fill: "none", stroke: "#0c4a6e", "stroke-width": "9", "stroke-linecap": "round", opacity: "0.55" }));
+    host.appendChild(svgEl("path", { d: b.shape.d, fill: "none", stroke: col, "stroke-width": "5", "stroke-linecap": "round" }));
+  }
+  // keep the name inside the cheek frame used on phones (x 300–700)
+  const name = single ? b.nameHe : b.short;
+  const half = (name.length * (single ? 7.6 : 6.4)) / 2;
+  const x = Math.min(692 - half, Math.max(308 + half, b.lx));
+  host.appendChild(svgEl("text", {
+    x, y: b.ly, "text-anchor": "middle", direction: "rtl", "font-size": single ? "15" : "12.5", "font-weight": "800",
+    "font-family": "Heebo, sans-serif", fill: "#ffffff", stroke: single ? "#0c4a6e" : "#111827", "stroke-width": "4", "paint-order": "stroke"
+  }, name));
+}
+
+function focusBone(id) {
+  boneFocusId = boneFocusId === id ? null : id;
+  const host = $id("boneFocusLayer"), svg = $id("cheekSvg");
+  host.innerHTML = "";
+  boneFocusPoints = null;
+  if (boneFocusId) {
+    const group = boneGroups.find((g) => g.id === boneFocusId);
+    const members = group ? group.members.map((m) => boneLandmarks.find((b) => b.id === m)) : [boneLandmarks.find((b) => b.id === boneFocusId)];
+    members.forEach((b) => drawBoneShape(host, b, !group));
+    boneFocusPoints = [...new Set(members.flatMap((b) => b.points))];
+    const bones = $id("bonesLayer");
+    if (bones && bones.style.display === "none") toggleLayer("bonesLayer");
+  }
+  svg.classList.toggle("bone-focus", !!boneFocusId);
+  document.querySelectorAll("[data-bone-btn]").forEach((el) => el.setAttribute("aria-pressed", el.dataset.boneBtn === boneFocusId ? "true" : "false"));
+  const clear = $id("boneClear");
+  if (clear) clear.hidden = !boneFocusId;
+  renderPoints();
+}
+
 function renderBoneLandmarks() {
   const host = $id("boneLabels"), legend = $id("boneLegend");
   if (typeof boneLandmarks === "undefined") return;
   if (host) {
     host.innerHTML = "";
     boneLandmarks.forEach((b) => {
-      const g = svgEl("g", { class: "bone-mark", "data-bone": b.id });
-      const t = svgEl("title", {}, `${b.letter} · ${b.nameHe} (${b.nameEn})`);
-      g.appendChild(t);
+      const g = svgEl("g", { class: "bone-mark", "data-bone": b.id, role: "button", tabindex: "0", "aria-label": `הצג במפה: ${b.nameHe}` });
+      g.appendChild(svgEl("title", {}, `${b.letter} · ${b.nameHe} (${b.nameEn}) – לחצו להדגשה`));
       g.appendChild(svgEl("circle", { cx: b.x, cy: b.y, r: 7.5, fill: "#e0f2fe", stroke: "#0369a1", "stroke-width": "1.6" }));
       g.appendChild(svgEl("text", { x: b.x, y: b.y + 3.6, "text-anchor": "middle", "font-size": "10", "font-weight": "800", fill: "#0c4a6e", "font-family": "Heebo, sans-serif", "pointer-events": "none" }, b.letter));
+      g.addEventListener("click", (e) => { e.stopPropagation(); focusBone(b.id); });
+      g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); focusBone(b.id); } });
       host.appendChild(g);
     });
   }
@@ -502,9 +545,16 @@ function renderBoneLandmarks() {
       const pt = cheekPoints.find((p) => p.code === code);
       return pt ? `<button type="button" class="bone-pt" data-code="${code}" aria-label="הצג ${code}">${codeBadge(pt)}</button>` : "";
     };
-    legend.innerHTML = `<strong>ציוני דרך גרמיים (לפי איור 2-1-1 בספר, עמ' 14–16):</strong> האותיות על שכבת העצמות; לחיצה על קוד מציגה את הנקודה.
-      <ol class="bone-list">${boneLandmarks.map((b) => `<li><span class="bone-letter" aria-hidden="true">${b.letter}</span><span class="bone-txt"><b>${escHtml(b.nameHe)}</b> <span class="muted" lang="en">${escHtml(b.nameEn)}</span><br><span class="bone-note">${escHtml(b.note)}</span></span><span class="chips">${b.points.map(ptChip).join("")}</span></li>`).join("")}</ol>`;
+    legend.innerHTML = `<strong>ציוני דרך גרמיים (לפי איור 2-1-1 בספר, עמ' 14–16):</strong> לחצו על עצם כדי לראות אותה צבועה במפה – השרירים מתעמעמים ונשארות מודגשות רק הנקודות שנמדדות ממנה. לחיצה נוספת מבטלת.
+      <div class="bone-groups">${boneGroups.map((g) => `<button type="button" class="btn btn-sm bone-group-btn" data-bone-btn="${g.id}" aria-pressed="false">🦴 ${escHtml(g.label)}</button>`).join("")}
+        <button type="button" class="btn btn-ghost btn-sm" id="boneClear" hidden>✕ חזרה למפה הרגילה</button></div>
+      <ol class="bone-list">${boneLandmarks.map((b) => `<li><button type="button" class="bone-show" data-bone-btn="${b.id}" aria-pressed="false" title="הצג במפה"><span class="bone-letter" aria-hidden="true">${b.letter}</span><span class="bone-txt"><b>${escHtml(b.nameHe)}</b> <span class="muted" lang="en">${escHtml(b.nameEn)}</span><br><span class="bone-note">${escHtml(b.note)}</span></span></button><span class="chips">${b.points.map(ptChip).join("")}</span></li>`).join("")}</ol>`;
     legend.querySelectorAll(".bone-pt").forEach((btn) => btn.addEventListener("click", () => selectPoint(btn.dataset.code)));
+    legend.querySelectorAll("[data-bone-btn]").forEach((btn) => btn.addEventListener("click", () => {
+      focusBone(btn.dataset.boneBtn);
+      if (boneFocusId) $id("cheekSvg").scrollIntoView({ behavior: "smooth", block: "center" });
+    }));
+    $id("boneClear").addEventListener("click", () => boneFocusId && focusBone(boneFocusId));
   }
 }
 
